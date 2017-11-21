@@ -63,8 +63,8 @@ public class ForumDaoImpl implements ForumDao {
 
 	@Transactional
 	public List<Forum> getAllForums() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return sessionFactory.getCurrentSession().createQuery("from Forum").list();
 	}
 
 }

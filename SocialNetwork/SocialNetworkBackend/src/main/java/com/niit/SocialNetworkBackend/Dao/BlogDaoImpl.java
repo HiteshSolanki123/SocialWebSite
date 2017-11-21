@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +61,8 @@ public class BlogDaoImpl implements BlogDao {
 
 	@Transactional
 	public List<Blog> getAllBlogs() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return sessionFactory.getCurrentSession().createQuery("from Blog").list();
 	}
 
 	@Transactional
