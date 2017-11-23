@@ -1,0 +1,10 @@
+com\niit\SocialNetworkBackend\Config\ApplicationContextConfig.class
+com\niit\SocialNetworkBackend\Dao\BlogDao.class
+com\niit\SocialNetworkBackend\Dao\BlogDaoImpl.class
+com\niit\SocialNetworkBackend\Dao\UserDao.class
+com\niit\SocialNetworkBackend\Dao\UserDaoImpl.class
+com\niit\SocialNetworkBackend\Model\Blog.class
+com\niit\SocialNetworkBackend\Dao\ForumDaoImpl.class
+com\niit\SocialNetworkBackend\Model\Forum.class
+com\niit\SocialNetworkBackend\Dao\ForumDao.class
+com\niit\SocialNetworkBackend\Model\User.class
