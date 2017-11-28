@@ -26,6 +26,7 @@ public class UserController {
 	public List <User> getAllUser(){
 		return userDAO.getAllUser();
 	}
+	
 	@RequestMapping(value="/register",method=RequestMethod.POST)
 	public ResponseEntity<User> createUser(@RequestBody User user){
 		boolean isSaved=userDAO.saveUser(user);

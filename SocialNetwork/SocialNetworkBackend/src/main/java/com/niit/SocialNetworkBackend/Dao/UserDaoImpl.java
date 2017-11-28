@@ -42,4 +42,11 @@ public class UserDaoImpl implements UserDao{
 		}
 	}
 
+
+	@Override
+	public User getByEmail(String email) {
+		
+		return (User)sessionFactory.getCurrentSession().get(User.class, email);
+	}
+
 }
