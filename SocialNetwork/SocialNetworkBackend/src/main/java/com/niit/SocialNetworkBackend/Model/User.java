@@ -16,6 +16,15 @@ public class User {
 	private String email;
 	private String password;
 	private String phone;
+	private String isOnline;
+
+	public String getIsOnline() {
+		return isOnline;
+	}
+
+	public void setIsOnline(String isOnline) {
+		this.isOnline = isOnline;
+	}
 
 	public int getUid() {
 		return uid;

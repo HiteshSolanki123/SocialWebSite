@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +32,12 @@ public class ForumController {
 	@RequestMapping(value="/getAllForums",method=RequestMethod.GET,headers="Accept=application/json")
 	public List<Forum> getAllForums(){
 		return forumDAO.getAllForums();
+	}
+	@DeleteMapping("/deleteForum/{forumId}")
+	public ResponseEntity<Forum> deleteForum(@PathVariable int forumId)
+	{
+		Forum forum=forumDAO.getForum(forumId);
+		forumDAO.deleteForum(forum);
+		return new ResponseEntity<Forum>(HttpStatus.OK);
 	}
 }

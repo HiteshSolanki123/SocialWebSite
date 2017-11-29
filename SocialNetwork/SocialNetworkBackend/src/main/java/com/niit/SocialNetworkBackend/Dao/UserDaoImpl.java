@@ -42,11 +42,27 @@ public class UserDaoImpl implements UserDao{
 		}
 	}
 
-
+	@Transactional
 	@Override
 	public User getByEmail(String email) {
 		
 		return (User)sessionFactory.getCurrentSession().get(User.class, email);
+	}
+
+	@Transactional
+	@Override
+	public boolean updateOnlineStatus(String status, User user) {
+		try
+		{
+			user.setIsOnline(status);
+			sessionFactory.getCurrentSession().update(user);
+			return true;
+		}catch(Exception e)
+		{
+			System.out.println("exception arised"+e);
+			return false;
+		}
+	
 	}
 
 }

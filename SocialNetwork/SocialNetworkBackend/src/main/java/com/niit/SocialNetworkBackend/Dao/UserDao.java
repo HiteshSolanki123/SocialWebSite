@@ -10,4 +10,5 @@ public interface UserDao {
 	
 	public boolean saveUser(User user);
 	public User getByEmail(String email);
+	public boolean updateOnlineStatus(String status,User user);
 }
