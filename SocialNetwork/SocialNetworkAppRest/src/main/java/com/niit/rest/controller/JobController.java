@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.SocialNetworkBackend.Dao.JobsDao;
+import com.niit.SocialNetworkBackend.Model.Blog;
 import com.niit.SocialNetworkBackend.Model.Jobs;
 
 @RestController
@@ -40,6 +41,24 @@ public class JobController {
 		Jobs jobs=jobsDAO.getJobs(jobId);
 		jobsDAO.deleteJobs(jobs);
 		return new ResponseEntity<Jobs>(HttpStatus.OK);
+	}
+	@PostMapping(value="/updateJob")
+	public ResponseEntity<String> updateJobs(@RequestBody Jobs jobs)
+	{
+		Jobs tempJobs=jobsDAO.getJobs(jobs.getJobId());
+		
+		tempJobs.setJobDesc(jobs.getJobDesc());
+		tempJobs.setJobProfile(jobs.getJobProfile());
+		
+		if(jobsDAO.updateJobs(tempJobs))
+		{
+			return new ResponseEntity<String>("Blog Added",HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<String>("problem ipdating blog",HttpStatus.METHOD_FAILURE);
+		}
+		
 	}
 
 	

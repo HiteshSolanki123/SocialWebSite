@@ -47,4 +47,22 @@ public class BlogController {
 			blogDAO.deleteBlog(blog);
 			return new ResponseEntity<Blog>(HttpStatus.OK);
 		}
+		@PostMapping(value="/updateBlog")
+		public ResponseEntity<String> updateBlog(@RequestBody Blog blog)
+		{
+			Blog tempBlog=blogDAO.getBlog(blog.getBlogId());
+			
+			tempBlog.setBlogName(blog.getBlogName());
+			tempBlog.setBlogContent(blog.getBlogContent());
+			
+			if(blogDAO.updateBlog(tempBlog))
+			{
+				return new ResponseEntity<String>("Blog Added",HttpStatus.OK);
+			}
+			else
+			{
+				return new ResponseEntity<String>("problem ipdating blog",HttpStatus.METHOD_FAILURE);
+			}
+			
+		}
 }
