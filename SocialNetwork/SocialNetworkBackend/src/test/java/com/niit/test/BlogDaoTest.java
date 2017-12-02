@@ -26,7 +26,6 @@ public class BlogDaoTest {
 		blogDAO=(BlogDao) annotationConfigApplicationContext.getBean("blogDAO");
 		}
 
-	@Ignore
 	@Test
 	public void addBlog() {
 		Blog blog = new Blog();
@@ -64,7 +63,7 @@ public class BlogDaoTest {
 		System.out.println("blog name "+blog.getBlogName());
 		System.out.println("blog content"+blog.getBlogContent());
 	}
-	
+	@Ignore
 	@Test
 	public void getAllBlogsTest()
 	{
