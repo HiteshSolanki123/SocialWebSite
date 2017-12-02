@@ -26,6 +26,7 @@ public class BlogController {
 		public ResponseEntity<String> insertBlog(@RequestBody Blog blog)
 		
 		{
+			blog.setCreateDate(new java.util.Date());
 			if(blogDAO.addBlog(blog))
 			
 				return new ResponseEntity<String>("Blog Added",HttpStatus.OK);

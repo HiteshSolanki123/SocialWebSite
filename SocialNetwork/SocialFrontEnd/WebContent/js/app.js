@@ -7,9 +7,9 @@ app.config(function($routeProvider, $locationProvider) {
 	$routeProvider
 
 	// route for the blog page
-	.when('/Blog', {
-		templateUrl : 'Blog/Blog.html',
-		controller : 'BlogController'
+	.when('/blog', {
+		templateUrl : 'blog/blog.html',
+		controller : 'blogController'
 	})
 	// route for the home page
 	.when('/', {
