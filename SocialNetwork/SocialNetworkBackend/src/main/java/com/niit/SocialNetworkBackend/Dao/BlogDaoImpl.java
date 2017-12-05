@@ -67,8 +67,28 @@ public class BlogDaoImpl implements BlogDao {
 
 	@Transactional
 	public boolean approveBlog(Blog blog) {
-		// TODO Auto-generated method stub
-		return false;
+		try{
+			blog.setStatus("A");
+			sessionFactory.getCurrentSession().update(blog);
+			return true;
+		}catch(Exception e)
+		{
+			System.out.println("exception occured"+e);
+			return false;
+		}
+	}
+	@Transactional
+	@Override
+	public boolean rejectBlog(Blog blog) {
+		try{
+			blog.setStatus("NA");
+			sessionFactory.getCurrentSession().update(blog);
+			return true;
+		}catch(Exception e)
+		{
+			System.out.println("exception occured"+e);
+			return false;
+		}
 	}
 
 }

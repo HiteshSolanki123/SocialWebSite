@@ -25,6 +25,7 @@ public class ForumController {
 	@PostMapping(value="/insertForum")
 	public ResponseEntity<String> insertForum(@RequestBody Forum forum)
 	{
+		forum.setCreateDate(new java.util.Date());
 		if(forumDAO.addForum(forum))
 			return new ResponseEntity<String>("Forum Added",HttpStatus.OK);
 		else

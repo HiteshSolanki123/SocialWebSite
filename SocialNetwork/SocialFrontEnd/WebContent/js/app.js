@@ -11,6 +11,22 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl : 'blog/blog.html',
 		controller : 'blogController'
 	})
+	// route for the forum page
+	.when('/forum',{
+		templateUrl : 'forum/forum.html',
+		controller : 'forumController'
+	})
+	.when('/adminBlog',{
+		templateUrl : 'blog/adminBlog.html',
+		controller : 'adminBlogController'
+	})
+	
+	//route for the jobs
+	.when('/jobs',{
+		templateUrl : 'jobs/jobs.html',
+		controller : 'jobsController'
+	})
+	
 	// route for the home page
 	.when('/', {
 		templateUrl : 'pages/home.html',

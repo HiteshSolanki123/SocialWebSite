@@ -3,8 +3,8 @@
 </center>
 <div ng-controller="blogController">
 
-	<form id="blogform" data-ng-submit="insertBlog()"method="post">
-		<table align="center" width="80%" border="1">
+	<form id="blogform" data-ng-submit="insertBlog()" method="post">
+		<table align="center" width="100%" border=1>
 			<tr>
 				<td>Blog Name</td>
 				<td><input type="text" name="blogName" data-ng-model="blog.blogName"/></td>
@@ -19,15 +19,17 @@
 	</form>
 
 <br/>
-	<table align="center" "100" border=1>
+	<table align="center" width="100" border=1>
 		
 		<tr bgcolor="orange">
 			<td>Blog Name</td>
 			<td>Blog Content</td>
+			<td>Operations</td>
 		</tr>
 		<tr bgcolor="cyan" ng-repeat="blog in blogdata">
 			<td>{{blog.blogName}}</td>
 			<td>{{blog.blogContent}}</td>
+			<td colspan="2"><center><input type="submit" value=" Delete Blog" ng-click="deleteBlog(blog.blogId)"></center>
 		</tr>
 
 	</table>

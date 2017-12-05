@@ -12,4 +12,5 @@ public interface BlogDao {
 	public Blog getBlog(int blogId);
 	public List<Blog> getAllBlogs();
 	public boolean approveBlog(Blog blog);
+	public boolean rejectBlog(Blog blog);
 }
