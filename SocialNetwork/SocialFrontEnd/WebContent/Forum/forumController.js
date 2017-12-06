@@ -19,4 +19,15 @@ app.controller("forumController", function($scope, $http, $location) {
 			$location.path("/forum")
 		});
 	}
+	$scope.deleteForum=function(forumId)
+	{
+		console.log("forum deleted");
+		$http.get("http://localhost:8080/SocialNetworkAppRest/deleteForum/"+forumId)
+		.success(fetchAllForum(),function(response){
+			console.log('successful deletion');
+			$scope.refresh();
+			$location.path("/forum");
+		});
+	};
+	
 });

@@ -19,16 +19,18 @@
 	</form>
 
 <br/>
-	<table align="center" width="100" border=1>
+	<table align="center" width="100%" border=1>
 		
 		<tr bgcolor="orange">
 			<td>Blog Name</td>
 			<td>Blog Content</td>
+			<td>Likes</td>
 			<td>Operations</td>
 		</tr>
 		<tr bgcolor="cyan" ng-repeat="blog in blogdata">
 			<td>{{blog.blogName}}</td>
 			<td>{{blog.blogContent}}</td>
+			<td>{{blog.likes}}<input type="submit" value="Like" ng-click="likeBlog(blog.blogId)"/></td>
 			<td colspan="2"><center><input type="submit" value=" Delete Blog" ng-click="deleteBlog(blog.blogId)"></center>
 		</tr>
 

@@ -10,4 +10,21 @@ app.controller("adminBlogController", function($scope, $http, $location) {
 	}
 	;
 	fetchAllBlog();
+	$scope.approveBlog=function(blogId) 
+	{
+		console.log("entered in approve blog");
+		$http.get('http://localhost:8080/SocialNetworkAppRest/approveBlog/'+ blogId)
+				.then(fetchAllBlog(), function(response) 
+		{
+			console.log("Blog is approved");
+		}
+		)
+	}
+	$scope.rejectBlog=function(blogId)
+	{
+	$http.get('http://localhost:8080/SocialNetworkAppRest/rejectBlog/'+blogId)
+	.then(fetchAllBlog(),function(response){
+		console.log('blog rejected');
+	})
+	}
 });

@@ -67,26 +67,37 @@ public class BlogDaoImpl implements BlogDao {
 
 	@Transactional
 	public boolean approveBlog(Blog blog) {
-		try{
+		try {
 			blog.setStatus("A");
 			sessionFactory.getCurrentSession().update(blog);
 			return true;
-		}catch(Exception e)
-		{
-			System.out.println("exception occured"+e);
+		} catch (Exception e) {
+			System.out.println("exception occured" + e);
+			return false;
+		}
+	}
+
+	@Transactional
+	@Override
+	public boolean rejectBlog(Blog blog) {
+		try {
+			blog.setStatus("NA");
+			sessionFactory.getCurrentSession().update(blog);
+			return true;
+		} catch (Exception e) {
+			System.out.println("exception occured" + e);
 			return false;
 		}
 	}
 	@Transactional
 	@Override
-	public boolean rejectBlog(Blog blog) {
-		try{
-			blog.setStatus("NA");
+	public boolean incrementLike(Blog blog) {
+		try {
+			blog.setLikes(blog.getLikes() + 1);
 			sessionFactory.getCurrentSession().update(blog);
 			return true;
-		}catch(Exception e)
-		{
-			System.out.println("exception occured"+e);
+		} catch (Exception e) {
+			System.out.println("exception arised" + e);
 			return false;
 		}
 	}

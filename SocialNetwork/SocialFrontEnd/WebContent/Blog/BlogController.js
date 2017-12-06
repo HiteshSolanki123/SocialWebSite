@@ -20,11 +20,23 @@ app.controller("blogController", function($scope, $http, $location) {
 	};
 	$scope.deleteBlog = function(blogId) {
 		console.log("entering in delete blog");
-		$http.delete("http://localhost:8080/SocialNetworkAppRest/deleteBlog/",
-				$scope.blog).success(fetchAllBlog(), function(response) {
-					$scope.refresh();
-			console.log("successful deleted");
-			
+		$http.get("http://localhost:8080/SocialNetworkAppRest/deleteBlog/"+ blogId)
+				.success(fetchAllBlog(), function(response) {
+			console.log('successful deletion');
+			$scope.refresh();
+			$location.path("/blog");
+
 		});
+	};
+	$scope.likeBlog=function(blogId)
+	{
+		console.log("enterd into like ");
+		$http.get('http://localhost:8080/SocialNetworkAppRest/incLike/'+ blogId)
+		.success(fetchAllBlog(),function(response)
+				{
+				console.log("like incremented")
+				$scope.refresh();
+				$location.path("/blog");
+				});
 	};
 });

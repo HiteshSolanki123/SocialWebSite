@@ -43,14 +43,21 @@ public class BlogController {
 		return blogDAO.getAllBlogs();
 	}
 
-	@DeleteMapping("/deleteBlog/{blogId}")
-	public ResponseEntity<Blog> deleteBlog(@PathVariable int blogId) {
-		Blog blog = blogDAO.getBlog(blogId);
-		blogDAO.deleteBlog(blog);
-		return new ResponseEntity<Blog>(HttpStatus.OK);
+	@GetMapping("/deleteBlog/{blogId}")
+	public ResponseEntity<String> deleteBlog(@PathVariable("blogId") int blogId) {
+		Blog tempblog = blogDAO.getBlog(blogId);
+		System.out.println("deletion in blog");
+		if (blogDAO.deleteBlog(tempblog)) 
+		{			
+			return new ResponseEntity<String>("Blog deleted", HttpStatus.OK);
+		} 
+		else
+		{
+			return new ResponseEntity<String>("problem deleting blog", HttpStatus.METHOD_FAILURE);
+		}
 	}
 
-	@PostMapping(value = "/updateBlog")
+	@PostMapping(value = "/editBlog")
 	public ResponseEntity<String> updateBlog(@RequestBody Blog blog) {
 		Blog tempBlog = blogDAO.getBlog(blog.getBlogId());
 
@@ -85,6 +92,18 @@ public class BlogController {
 		} else {
 			return new ResponseEntity<String>("error in Blog updation", HttpStatus.METHOD_FAILURE);
 
+		}
+	}
+	@GetMapping("/incLike/{blogId}")
+	public ResponseEntity<String> incrementLike(@PathVariable("blogId") int blogId)
+	{
+		Blog tempblog=blogDAO.getBlog(blogId);
+		if(blogDAO.incrementLike(tempblog))
+		{
+			return new ResponseEntity<String>("like incremented",HttpStatus.OK);
+		}
+		else{
+			return new ResponseEntity<String>("error in like increment",HttpStatus.METHOD_FAILURE);
 		}
 	}
 }
