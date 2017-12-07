@@ -35,12 +35,12 @@ app.config(function($routeProvider, $locationProvider) {
 
 	.when('/registration', {
 		templateUrl : 'user/registration.html',
-		controller : 'registrationController'
+		controller : 'userController'
 	})
 	// route for the about page
 	.when('/login', {
 		templateUrl : 'user/login.html',
-		controller : 'loginController'
+		controller : 'userController'
 	});
 });
 

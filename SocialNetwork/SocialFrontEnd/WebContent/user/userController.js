@@ -1,26 +1,39 @@
-app.controller('loginController', function($scope) {
+/*app.controller('loginController', function($scope,$http) {
 	$scope.message = 'Look! I am an login page.';
+	console.log("login function");
+	$http.post("http://localhost:8080/SocialNetworkAppRest/login")
+	.then(function(response)
+			{
+				$scope.user=response.data;
+				$location.path("/");
+			});
 });
-
-app.controller('registrationController', function($scope, userService) {
-	$scope.message = 'Look! I am an registration page.';
-
-	
-	$scope.user={uid:'',password:'',email:'',firstname:'',lastname:'',phone:'',successMessage:'',errorMesssage:''};
-	$scope.register = function() {
-
-		console.log("**********in side the resgietr method****");
-		userService.createUser($scope.user).then(function(response){
-			console.log("Registerd Successfully");
-			$scope.user.successMessage="Registerd Successfully";
-			
-		},function(error){
-			console.error("Error while creating user");
-			$scope.user.successMessage="Error while creating user";
-		})
-		
-		
+*/
+app.controller("userController", function($scope, $http, $location) {
+	$scope.register=function()
+	{
+		console.log("enter register");
+		$http.post("http://localhost:8080/SocialNetworkAppRest/register",$scope.user)
+		.then(function(response)
+				{
+					console.log("successfully registered");
+				});
 	}
-	
-
+	$scope.login=function()
+	{
+		console.log("loggin function");
+		$http.post("http://localhost:8080/SocialNetworkAppRest/login",$scope.user)
+		.then(function(response){
+			$scope.user=response.data;
+			console.log("login successful");
+			$location.path("/")
+		});
+	};
 });
+
+
+
+
+
+
+

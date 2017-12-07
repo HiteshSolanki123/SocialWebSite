@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -63,6 +64,25 @@ public class UserDaoImpl implements UserDao{
 			return false;
 		}
 	
+	}
+
+
+	@Override
+	public boolean checkLogin(User user) {
+		try{
+			Session session=sessionFactory.openSession();
+			Query query=session.createQuery("from User where email=:email and password=:paswrd");
+			query.setParameter("email",user.getEmail());
+			query.setParameter("paswrd",user.getPassword());
+			User user1=(User)query.list().get(0);
+			if(user1==null)
+				return false;
+			else
+				return true;
+		}catch(Exception e)
+		{
+			return false;
+		}
 	}
 
 }
