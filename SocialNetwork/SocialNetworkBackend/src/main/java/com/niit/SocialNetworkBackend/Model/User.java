@@ -9,8 +9,13 @@ import javax.persistence.Id;
 
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	private String username;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int uid;
+	private String role;
+	
+
 	private String firstname;
 	private String lastname;
 	private String email;
@@ -72,5 +77,20 @@ public class User {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

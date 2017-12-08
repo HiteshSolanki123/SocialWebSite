@@ -9,7 +9,8 @@
 			});
 });
 */
-app.controller("userController", function($scope, $http, $location) {
+app.controller("userController", function($scope, $http, $location,$rootScope) {
+	$scope.user={username:'',password:'',role:'',firstname:'',lastname:'',email:'',phone:'',isOnline:'',uid:''}
 	$scope.register=function()
 	{
 		console.log("enter register");
@@ -17,6 +18,7 @@ app.controller("userController", function($scope, $http, $location) {
 		.then(function(response)
 				{
 					console.log("successfully registered");
+					$location.path("/login");
 				});
 	}
 	$scope.login=function()
@@ -25,7 +27,8 @@ app.controller("userController", function($scope, $http, $location) {
 		$http.post("http://localhost:8080/SocialNetworkAppRest/login",$scope.user)
 		.then(function(response){
 			$scope.user=response.data;
-			console.log("login successful");
+			$rootScope.currentUser=response.data;
+			console.log($rootScope.currentUser.role);
 			$location.path("/")
 		});
 	};

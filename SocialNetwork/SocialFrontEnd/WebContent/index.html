@@ -6,7 +6,7 @@
 <link rel="stylesheet"href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
 
 </head>
-<body>
+<body>Role:{{currentUser.role}}
 
 	<nav class="navbar navbar-inverse">
 		<div class="container">
@@ -21,9 +21,12 @@
 				<li><a href="#blog"><i class="fa fa-shield"></i>Blog</a></li>
 				<li><a href="#forum"><i class="fa fa-shield"></i>Forum</a></li>
 				<li><a href="#jobs"><i class="fa fa-shield"></i>Job</a></li>
-				<li><a href="#admin"><span class="glyphicon glyphicon-user"></span>Admin</a></li>
-				<li><a href="#adminBlog"><span class="glyphicon glyphicon-off"></span>Admin Blog</a></li>
-
+				<div ng-show="currentUser.role=='Admin'">
+				<li><a href="#adminBlog"><span class="glyphicon glyphicon-user"></span>Admin Blog</a></li>
+				</div>
+				<div ng-show="currentUser.role=='User' || currentUser.role=='Admin'">
+				<li><a href="#logout"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
+				</div>
 			</ul>
 		</div>
 

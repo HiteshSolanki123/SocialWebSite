@@ -1,7 +1,7 @@
 <div class="jumbotron text-center">
 	<h1>Login Page</h1>
 	
-	<p>{{ message }}</p>
+	
 </div>
 <div ng-controller="userController">
 <div  class="container">
@@ -13,7 +13,7 @@
       <section class="login-form">
         <form method="post" action="#" role="login">
           <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
-          <input type="email" data-ng-model="user.email" name="email" placeholder="Email" required class="form-control input-lg"  />
+          <input type="text" data-ng-model="user.username" name="username" placeholder="username" required class="form-control input-lg"  />
           
           <input type="password" data-ng-model="user.password" class="form-control input-lg" id="password" placeholder="Password" required="" />
           

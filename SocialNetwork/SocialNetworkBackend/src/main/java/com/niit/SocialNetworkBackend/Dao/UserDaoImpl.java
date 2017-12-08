@@ -45,9 +45,9 @@ public class UserDaoImpl implements UserDao{
 
 	@Transactional
 	@Override
-	public User getByEmail(String email) {
+	public User getUser(String username) {
 		
-		return (User)sessionFactory.getCurrentSession().get(User.class, email);
+		return (User)sessionFactory.getCurrentSession().get(User.class, username);
 	}
 
 	@Transactional
@@ -60,7 +60,7 @@ public class UserDaoImpl implements UserDao{
 			return true;
 		}catch(Exception e)
 		{
-			System.out.println("exception arised"+e);
+			System.out.println("exception arised:::"+e);
 			return false;
 		}
 	
@@ -71,8 +71,8 @@ public class UserDaoImpl implements UserDao{
 	public boolean checkLogin(User user) {
 		try{
 			Session session=sessionFactory.openSession();
-			Query query=session.createQuery("from User where email=:email and password=:paswrd");
-			query.setParameter("email",user.getEmail());
+			Query query=session.createQuery("from User where username=:uname and password=:paswrd");
+			query.setParameter("uname",user.getUsername());
 			query.setParameter("paswrd",user.getPassword());
 			User user1=(User)query.list().get(0);
 			if(user1==null)

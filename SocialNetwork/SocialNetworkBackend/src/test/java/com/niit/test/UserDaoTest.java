@@ -39,7 +39,7 @@ public class UserDaoTest {
 	public void checkLoginTest()
 	{
 		User user=new User();
-		user.setEmail("john@gmail.com");
+		user.setUsername("sunny");
 		user.setPassword("1235");
 		assertTrue("problem in login",userDAO.checkLogin(user));
 	}
