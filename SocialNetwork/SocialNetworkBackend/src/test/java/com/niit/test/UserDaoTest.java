@@ -39,8 +39,8 @@ public class UserDaoTest {
 	public void checkLoginTest()
 	{
 		User user=new User();
-		user.setUsername("sunny");
-		user.setPassword("1235");
+		user.setUsername("hitesh");
+		user.setPassword("12345");
 		assertTrue("problem in login",userDAO.checkLogin(user));
 	}
 }

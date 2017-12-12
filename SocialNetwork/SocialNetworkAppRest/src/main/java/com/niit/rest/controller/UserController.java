@@ -41,12 +41,14 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<User> checkLogin(@RequestBody User user, HttpSession session) {
+	public ResponseEntity <User> checkLogin(@RequestBody User user, HttpSession session) {
+		
 		if (userDAO.checkLogin(user)) {
-			System.out.println("logging");
+			System.out.println("logging"); 
 			User tempUser = userDAO.getUser(user.getUsername());
 			userDAO.updateOnlineStatus("Y", tempUser);
 			session.setAttribute("username", user.getUsername());
+			
 			return new ResponseEntity<User>(tempUser, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<User>(user, HttpStatus.METHOD_FAILURE);

@@ -1,16 +1,7 @@
-/*app.controller('loginController', function($scope,$http) {
-	$scope.message = 'Look! I am an login page.';
-	console.log("login function");
-	$http.post("http://localhost:8080/SocialNetworkAppRest/login")
-	.then(function(response)
-			{
-				$scope.user=response.data;
-				$location.path("/");
-			});
-});
-*/
 app.controller("userController", function($scope, $http, $location,$rootScope) {
 	$scope.user={username:'',password:'',role:'',firstname:'',lastname:'',email:'',phone:'',isOnline:'',uid:''}
+	$scope.allusers;
+	$scope.user;
 	$scope.register=function()
 	{
 		console.log("enter register");
@@ -24,7 +15,8 @@ app.controller("userController", function($scope, $http, $location,$rootScope) {
 	$scope.login=function()
 	{
 		console.log("loggin function");
-		$http.post("http://localhost:8080/SocialNetworkAppRest/login",$scope.user)
+		
+		$http.post("http://localhost:8080/SocialNetworkAppRest/login",$rootScope.currentUser)
 		.then(function(response){
 			$scope.user=response.data;
 			$rootScope.currentUser=response.data;
@@ -32,7 +24,17 @@ app.controller("userController", function($scope, $http, $location,$rootScope) {
 			$location.path("/")
 		});
 	};
-});
+	function fetchAllUsers()
+	{
+		console.log("fetching all users");
+		$http.get("http://localhost:8080/SocialNetworkAppRest/getAllUsers")
+		.then(function(response)
+				{
+					$scope.allusers=response.data;
+				});
+				};
+				fetchAllUsers();
+	});
 
 
 

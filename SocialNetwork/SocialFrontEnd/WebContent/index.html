@@ -3,10 +3,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Angular Session for routing Day -4</title>
-<link rel="stylesheet"href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
 
 </head>
-<body>Role:{{currentUser.role}}
+<body>
+
+	Role : {{ currentUser.role }}
 
 	<nav class="navbar navbar-inverse">
 		<div class="container">
@@ -22,11 +25,15 @@
 				<li><a href="#forum"><i class="fa fa-shield"></i>Forum</a></li>
 				<li><a href="#jobs"><i class="fa fa-shield"></i>Job</a></li>
 				<div ng-show="currentUser.role=='Admin'">
-				<li><a href="#adminBlog"><span class="glyphicon glyphicon-user"></span>Admin Blog</a></li>
+					<li><a href="#adminBlog"><span
+							class="glyphicon glyphicon-user"></span>Admin Blog</a></li>
 				</div>
-				<div ng-show="currentUser.role=='User' || currentUser.role=='Admin'">
-				<li><a href="#logout"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
+				<div ng-show="currentUser.role=='User'">
+					<li><a href="#logout"><span
+							class="glyphicon glyphicon-off"></span>Logout</a></li>
 				</div>
+				<li><a href="#friend"><span class="glyphicon glyphicon-off"></span>Friends</a></li>
+
 			</ul>
 		</div>
 
@@ -53,5 +60,6 @@
 	<script src="forum/forumController.js"></script>
 	<script src="jobs/jobsController.js"></script>
 	<script src="blog/adminBlogController.js"></script>
+	
 </body>
 </html>

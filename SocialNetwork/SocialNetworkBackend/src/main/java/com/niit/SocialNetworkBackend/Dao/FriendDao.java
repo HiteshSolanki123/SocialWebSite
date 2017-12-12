@@ -5,10 +5,10 @@ import java.util.List;
 import com.niit.SocialNetworkBackend.Model.Friend;
 
 public interface FriendDao {
-public boolean saveFriend(Friend friend);
-public boolean deleteFriend(Friend friend);
-public boolean updateFriend(Friend friend);
+public boolean createFriend(Friend friend);
+public List<Friend> getAllFriendRequest(String username);
+public List<Friend> getApprovedFriends(String username);
 public Friend getFriend(int friendId);
-public List<Friend> getAllFriend();
-
+public boolean  rejectFriendRequest(Friend friend);
+public boolean approveFriendRequest(Friend friend);
 }
