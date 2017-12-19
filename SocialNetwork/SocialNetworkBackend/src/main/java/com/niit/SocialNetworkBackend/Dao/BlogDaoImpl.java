@@ -10,15 +10,19 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.niit.SocialNetworkBackend.Model.Blog;
+import com.niit.SocialNetworkBackend.Model.Blogs;
 
 @Repository("blogDAO")
 public class BlogDaoImpl implements BlogDao {
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	public BlogDaoImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	@Transactional
-	public boolean addBlog(Blog blog) {
+	public boolean addBlog(Blogs blog) {
 		try {
 			sessionFactory.getCurrentSession().save(blog);
 			return true;
@@ -29,7 +33,7 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Transactional
-	public boolean updateBlog(Blog blog) {
+	public boolean updateBlog(Blogs blog) {
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(blog);
 			return true;
@@ -41,7 +45,7 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Transactional
-	public boolean deleteBlog(Blog blog) {
+	public boolean deleteBlog(Blogs blog) {
 		try {
 			sessionFactory.getCurrentSession().delete(blog);
 			return true;
@@ -53,20 +57,20 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Transactional
-	public Blog getBlog(int blogId) {
+	public Blogs getBlog(int blogId) {
 		Session session = sessionFactory.openSession();
-		Blog blog = (Blog) session.get(Blog.class, new Integer(blogId));
+		Blogs blog = (Blogs) session.get(Blogs.class, new Integer(blogId));
 		return blog;
 	}
 
 	@Transactional
-	public List<Blog> getAllBlogs() {
+	public List<Blogs> getAllBlogs() {
 
-		return sessionFactory.getCurrentSession().createQuery("from Blog").list();
+		return sessionFactory.getCurrentSession().createQuery("from Blogs").list();
 	}
 
 	@Transactional
-	public boolean approveBlog(Blog blog) {
+	public boolean approveBlog(Blogs blog) {
 		try {
 			blog.setStatus("A");
 			sessionFactory.getCurrentSession().update(blog);
@@ -78,8 +82,7 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Transactional
-	@Override
-	public boolean rejectBlog(Blog blog) {
+	public boolean rejectBlog(Blogs blog) {
 		try {
 			blog.setStatus("NA");
 			sessionFactory.getCurrentSession().update(blog);
@@ -90,8 +93,7 @@ public class BlogDaoImpl implements BlogDao {
 		}
 	}
 	@Transactional
-	@Override
-	public boolean incrementLike(Blog blog) {
+	public boolean incrementLike(Blogs blog) {
 		try {
 			blog.setLikes(blog.getLikes() + 1);
 			sessionFactory.getCurrentSession().update(blog);

@@ -1,7 +1,7 @@
 app.controller("forumController", function($scope, $http, $location) {
 	function fetchAllForum() {
 		console.log("fetching all forum");
-		$http.get("http://localhost:8080/SocialNetworkAppRest/getAllForums")
+		$http.get("http://localhost:8090/SocialNetworkAppRest/getAllForums")
 
 		.then(function(response) {
 			$scope.forumdata = response.data;
@@ -13,7 +13,7 @@ app.controller("forumController", function($scope, $http, $location) {
 	fetchAllForum();
 	$scope.insertForum = function() {
 		console.log('entered insertForum');
-		$http.post('http://localhost:8080/SocialNetworkAppRest/insertForum',
+		$http.post('http://localhost:8090/SocialNetworkAppRest/insertForum',
 				$scope.forum).then(fetchAllForum(), function(response) {
 			console.log("successful forum entered");
 			$location.path("/forum")
@@ -22,7 +22,7 @@ app.controller("forumController", function($scope, $http, $location) {
 	$scope.deleteForum=function(forumId)
 	{
 		console.log("forum deleted");
-		$http.get("http://localhost:8080/SocialNetworkAppRest/deleteForum/"+forumId)
+		$http.get("http://localhost:8090/SocialNetworkAppRest/deleteForum/"+forumId)
 		.success(fetchAllForum(),function(response){
 			console.log('successful deletion');
 			$scope.refresh();

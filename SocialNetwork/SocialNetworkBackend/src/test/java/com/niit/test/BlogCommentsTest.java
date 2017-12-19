@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.SocialNetworkBackend.Dao.BlogCommentsDao;
-import com.niit.SocialNetworkBackend.Model.BlogComments;
+import com.niit.SocialNetworkBackend.Model.BlogComment;
 
 public class BlogCommentsTest {
 	static BlogCommentsDao blogCommentsDAO;
@@ -26,7 +26,7 @@ public class BlogCommentsTest {
 	@Ignore
 	@Test
 	public void saveBlogCommentstest() {
-		BlogComments blogComments=new BlogComments();
+		BlogComment blogComments=new BlogComment();
 		blogComments.setBlogCommentsId(101);
 		blogComments.setBlogId(101);
 		blogComments.setComment("good");
@@ -38,29 +38,29 @@ public class BlogCommentsTest {
 	@Ignore
 	@Test
 	public void deleteBlogComments(){
-		BlogComments blogComments=(BlogComments)blogCommentsDAO.getBlogComments(1);
+		BlogComment blogComments=(BlogComment)blogCommentsDAO.getBlogComments(1);
 		assertTrue("",blogCommentsDAO.deleteBlogComments(blogComments));
 	}@Ignore
 	@Test
 	public void updateCommentsBlog()
 	{
-		BlogComments blogComments=(BlogComments)blogCommentsDAO.getBlogComments(2);
+		BlogComment blogComments=(BlogComment)blogCommentsDAO.getBlogComments(2);
 		blogComments.setComment("nice");
 		blogComments.setUserId(501);
 		assertTrue("forum is updated",blogCommentsDAO.updateBlogComments(blogComments));
 	}
 	@Test
 	public void getAllBlogComments(){
-		List<BlogComments>blogCommentsList=(List<BlogComments>)blogCommentsDAO.getAllBlogComments();
+		List<BlogComment>blogCommentsList=(List<BlogComment>)blogCommentsDAO.getAllBlogComments();
 		assertNotNull("",blogCommentsList.get(0));
-		for(BlogComments blogComments:blogCommentsList)
+		for(BlogComment blogComments:blogCommentsList)
 		{
 			System.out.println("blogcomment:::="+blogComments.getComment());
 	}
 	}
 	@Test
 	public void getBlogComments(){
-		BlogComments blogComments=(BlogComments)blogCommentsDAO.getBlogComments(2);
+		BlogComment blogComments=(BlogComment)blogCommentsDAO.getBlogComments(2);
 		assertNotNull("error",blogComments);
 		System.out.println("jobs desc is "+blogComments.getBlogCommentsId());
 		System.out.println("jobs profile"+blogComments.getComment());

@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.SocialNetworkBackend.Dao.UserDao;
-import com.niit.SocialNetworkBackend.Model.User;
+import com.niit.SocialNetworkBackend.Model.UserDetail;
 
 public class UserDaoTest {
 	static UserDao userDAO;
@@ -22,23 +22,25 @@ public class UserDaoTest {
 		userDAO = (UserDao) annotationConfigApplicationContext.getBean("userDAO");
 	}
 
-	@Ignore
+	
 	@Test
 	public void saveUser() {
-		User user = new User();
+		UserDetail user = new UserDetail();
+		user.setUsername("hitesh");
 		user.setEmail("user@gmail.com");
 		user.setFirstname("user");
 		user.setLastname("user");
-		user.setPassword("user");
+		user.setPassword("12345");
 		user.setPhone("123456789");
-		user.setUid(123);
+		
 		assertTrue("problem in adding CartItem", userDAO.saveUser(user));
 
 	}
+	@Ignore
 	@Test
 	public void checkLoginTest()
 	{
-		User user=new User();
+		UserDetail user=new UserDetail();
 		user.setUsername("hitesh");
 		user.setPassword("12345");
 		assertTrue("problem in login",userDAO.checkLogin(user));

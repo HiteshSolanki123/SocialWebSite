@@ -2,16 +2,16 @@ package com.niit.SocialNetworkBackend.Dao;
 
 import java.util.List;
 
-import com.niit.SocialNetworkBackend.Model.Blog;
+import com.niit.SocialNetworkBackend.Model.Blogs;
 
 public interface BlogDao {
 	
-	public boolean addBlog(Blog blog);
-	public boolean updateBlog(Blog blog);
-	public boolean deleteBlog(Blog blog);
-	public Blog getBlog(int blogId);
-	public List<Blog> getAllBlogs();
-	public boolean approveBlog(Blog blog);
-	public boolean rejectBlog(Blog blog);
-	public boolean incrementLike(Blog blog);
+	public boolean addBlog(Blogs blog);
+	public boolean updateBlog(Blogs blog);
+	public boolean deleteBlog(Blogs blog);
+	public Blogs getBlog(int blogId);
+	public List<Blogs> getAllBlogs();
+	public boolean approveBlog(Blogs blog);
+	public boolean rejectBlog(Blogs blog);
+	public boolean incrementLike(Blogs blog);
 }

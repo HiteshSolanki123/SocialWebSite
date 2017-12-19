@@ -9,15 +9,17 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.niit.SocialNetworkBackend.Model.BlogComments;
+import com.niit.SocialNetworkBackend.Model.BlogComment;
 @Repository("blogCommentsDAO")
 public class BlogCommentsDaoImpl implements BlogCommentsDao {
 	@Autowired
 	SessionFactory sessionFactory;
+	public BlogCommentsDaoImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	@Transactional
-	@Override
-	public boolean saveBlogComments(BlogComments blogComments) {
+	public boolean saveBlogComments(BlogComment blogComments) {
 		try {
 			sessionFactory.getCurrentSession().save(blogComments);
 			return true;
@@ -27,8 +29,7 @@ public class BlogCommentsDaoImpl implements BlogCommentsDao {
 		return false;
 	}
 	@Transactional
-	@Override
-	public boolean deleteBlogComments(BlogComments blogComments) {
+	public boolean deleteBlogComments(BlogComment blogComments) {
 		try {
 			sessionFactory.getCurrentSession().delete(blogComments);
 			return true;
@@ -38,8 +39,7 @@ public class BlogCommentsDaoImpl implements BlogCommentsDao {
 		return false;
 	}
 	@Transactional
-	@Override
-	public boolean updateBlogComments(BlogComments blogComments) {
+	public boolean updateBlogComments(BlogComment blogComments) {
 		try {
 			sessionFactory.getCurrentSession().update(blogComments);
 			return true;
@@ -49,17 +49,15 @@ public class BlogCommentsDaoImpl implements BlogCommentsDao {
 		return false;
 	}
 	@Transactional
-	@Override
-	public BlogComments getBlogComments(int blogCommentsId) {
+	public BlogComment getBlogComments(int blogCommentsId) {
 
 		Session session = sessionFactory.openSession();
-		BlogComments blogComments = (BlogComments) session.get(BlogComments.class, new Integer(blogCommentsId));
+		BlogComment blogComments = (BlogComment) session.get(BlogComment.class, new Integer(blogCommentsId));
 		return blogComments;
 
 	}
 	@Transactional
-	@Override
-	public List<BlogComments> getAllBlogComments() {
+	public List<BlogComment> getAllBlogComments() {
 
 		return sessionFactory.getCurrentSession().createQuery("from BlogComments").list();
 	}

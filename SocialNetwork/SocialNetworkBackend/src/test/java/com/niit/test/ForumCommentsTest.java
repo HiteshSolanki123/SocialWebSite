@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.SocialNetworkBackend.Dao.ForumCommentsDao;
-import com.niit.SocialNetworkBackend.Model.ForumComments;
+import com.niit.SocialNetworkBackend.Model.ForumComment;
 
 public class ForumCommentsTest {
 	static ForumCommentsDao forumCommentsDAO;
@@ -28,9 +28,9 @@ public class ForumCommentsTest {
 	@Ignore
 	@Test
 	public void saveForumCommentstest() {
-		ForumComments forumComments = new ForumComments();
+		ForumComment forumComments = new ForumComment();
 		forumComments.setComment("liked");
-		forumComments.setfComment(101);
+		
 		forumComments.setForumId(102);
 		forumComments.setUserId(103);
 		forumComments.setUsername("comments");
@@ -40,7 +40,7 @@ public class ForumCommentsTest {
 	@Ignore
 	@Test
 	public void deleteForumComments() {
-		ForumComments forumComments = (ForumComments) forumCommentsDAO.getForumComments(1);
+		ForumComment forumComments = (ForumComment) forumCommentsDAO.getForumComments(1);
 		assertTrue("", forumCommentsDAO.deleteForumComments(forumComments));
 
 	}
@@ -48,7 +48,7 @@ public class ForumCommentsTest {
 	@Ignore
 	@Test
 	public void updatesForumComment() {
-		ForumComments forumComments = (ForumComments) forumCommentsDAO.getForumComments(2);
+		ForumComment forumComments = (ForumComment) forumCommentsDAO.getForumComments(2);
 		forumComments.setComment("nice");
 		forumComments.setUserId(501);
 		assertTrue("forum is updated", forumCommentsDAO.updateForumComments(forumComments));
@@ -57,16 +57,16 @@ public class ForumCommentsTest {
 	@Ignore
 	@Test
 	public void getAllForumComments() {
-		List<ForumComments> forumCommentsList = (List<ForumComments>) forumCommentsDAO.getAllForumComments();
+		List<ForumComment> forumCommentsList = (List<ForumComment>) forumCommentsDAO.getAllForumComments();
 		assertNotNull("", forumCommentsList.get(0));
-		for (ForumComments forumComments : forumCommentsList) {
+		for (ForumComment forumComments : forumCommentsList) {
 			System.out.println("forumcomment:::=" + forumComments.getComment());
 		}
 	}
 
 	@Test
 	public void getForumComments() {
-		ForumComments forumComments = (ForumComments) forumCommentsDAO.getForumComments(2);
+		ForumComment forumComments = (ForumComment) forumCommentsDAO.getForumComments(2);
 		assertNotNull("error", forumComments);
 		System.out.println("forum usernameis:: " + forumComments.getUsername());
 		System.out.println("forumcomment::" + forumComments.getComment());

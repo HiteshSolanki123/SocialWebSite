@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.SocialNetworkBackend.Dao.JobsDao;
-import com.niit.SocialNetworkBackend.Model.Blog;
+import com.niit.SocialNetworkBackend.Model.Blogs;
 import com.niit.SocialNetworkBackend.Model.Jobs;
 
 public class JobsDaoTest {

@@ -1,33 +1,34 @@
-app.controller("userController", function($scope, $http, $location,$rootScope) {
-	$scope.user={username:'',password:'',role:'',firstname:'',lastname:'',email:'',phone:'',isOnline:'',uid:''}
+app.controller("userController", function($scope, $http, $location,$rootScope) 
+	{
+	$scope.user={username:'',password:'',role:'',firstname:'',lastname:'',email:'',phone:'',isOnline:''};
 	$scope.allusers;
-	$scope.user;
 	$scope.register=function()
 	{
 		console.log("enter register");
-		$http.post("http://localhost:8080/SocialNetworkAppRest/register",$scope.user)
+		$http.post("http://localhost:8090/SocialNetworkAppRest/register",$scope.user)
 		.then(function(response)
 				{
 					console.log("successfully registered");
 					$location.path("/login");
 				});
 	}
-	$scope.login=function()
+	$scope.loginuser=function()
 	{
-		console.log("loggin function");
+		console.log("login function");
 		
-		$http.post("http://localhost:8080/SocialNetworkAppRest/login",$rootScope.currentUser)
+		$http.post("http://localhost:8090/SocialNetworkAppRest/login",$scope.user)
 		.then(function(response){
 			$scope.user=response.data;
 			$rootScope.currentUser=response.data;
+			$cookieStore.put('user',response.data);
 			console.log($rootScope.currentUser.role);
-			$location.path("/")
+			$location.path("/UserHome")
 		});
-	};
+	}
 	function fetchAllUsers()
 	{
 		console.log("fetching all users");
-		$http.get("http://localhost:8080/SocialNetworkAppRest/getAllUsers")
+		$http.get("http://localhost:8090/SocialNetworkAppRest/getAllUsers")
 		.then(function(response)
 				{
 					$scope.allusers=response.data;
@@ -35,6 +36,7 @@ app.controller("userController", function($scope, $http, $location,$rootScope) {
 				};
 				fetchAllUsers();
 	});
+
 
 
 

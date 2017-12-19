@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.SocialNetworkBackend.Dao.BlogDao;
-import com.niit.SocialNetworkBackend.Model.Blog;
+import com.niit.SocialNetworkBackend.Model.Blogs;
 
 
 
@@ -25,10 +25,10 @@ public class BlogDaoTest {
 		annotationConfigApplicationContext.refresh();
 		blogDAO=(BlogDao) annotationConfigApplicationContext.getBean("blogDAO");
 		}
-
+	@Ignore
 	@Test
 	public void addBlog() {
-		Blog blog = new Blog();
+		Blogs blog = new Blogs();
 		blog.setBlogContent("blog");
 		blog.setBlogId(123);
 		blog.setBlogName("blog");
@@ -42,23 +42,23 @@ public class BlogDaoTest {
 	@Test
 	public void deleteBlogTest()
 	{
-		Blog blog=(Blog)blogDAO.getBlog(1);
+		Blogs blog=(Blogs)blogDAO.getBlog(1);
 		assertTrue("blog deleted",blogDAO.deleteBlog(blog));
 	}
 	@Ignore
 	@Test
 	public void updateBlogTest()
 	{
-		Blog blog=(Blog)blogDAO.getBlog(4);
+		Blogs blog=(Blogs)blogDAO.getBlog(4);
 		blog.setBlogContent("java");
 		blog.setBlogName("vanilla java");
 		assertTrue("blog updated",blogDAO.updateBlog(blog));
 	}
-	@Ignore
+	
 	@Test
 	public void getBlogTest()
 	{
-		Blog blog=blogDAO.getBlog(4);
+		Blogs blog=blogDAO.getBlog(1);
 		assertNotNull("",blog);
 		System.out.println("blog name "+blog.getBlogName());
 		System.out.println("blog content"+blog.getBlogContent());
@@ -67,9 +67,9 @@ public class BlogDaoTest {
 	@Test
 	public void getAllBlogsTest()
 	{
-		List<Blog>blogList=(List<Blog>)blogDAO.getAllBlogs();
+		List<Blogs>blogList=(List<Blogs>)blogDAO.getAllBlogs();
 		assertNotNull("blog is null",blogList.get(0));
-		for(Blog blog:blogList)
+		for(Blogs blog:blogList)
 		{
 			System.out.println("blog is"+blog.getBlogId()+":::"+"blog name::"+blog.getBlogName()+"");
 		}

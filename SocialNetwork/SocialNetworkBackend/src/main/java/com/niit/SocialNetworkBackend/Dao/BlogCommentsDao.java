@@ -2,16 +2,16 @@ package com.niit.SocialNetworkBackend.Dao;
 
 import java.util.List;
 
-import com.niit.SocialNetworkBackend.Model.BlogComments;
+import com.niit.SocialNetworkBackend.Model.BlogComment;
 
 public interface BlogCommentsDao {
-	public boolean saveBlogComments(BlogComments blogComments);
+	public boolean saveBlogComments(BlogComment blogComments);
 
-	public boolean deleteBlogComments(BlogComments blogComments);
+	public boolean deleteBlogComments(BlogComment blogComments);
 
-	public boolean updateBlogComments(BlogComments blogComments);
+	public boolean updateBlogComments(BlogComment blogComments);
 
-	public BlogComments getBlogComments(int blogCommentsId);
+	public BlogComment getBlogComments(int blogCommentsId);
 
-	public List<BlogComments> getAllBlogComments();
+	public List<BlogComment> getAllBlogComments();
 }

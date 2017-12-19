@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.SocialNetworkBackend.Dao.UserDao;
-import com.niit.SocialNetworkBackend.Model.User;
+import com.niit.SocialNetworkBackend.Model.UserDetail;
 
 @RestController
 public class UserController {
@@ -25,39 +25,39 @@ public class UserController {
 	private UserDao userDAO;
 
 	@RequestMapping(value = "/getAllUsers", method = RequestMethod.GET, headers = "Accept=application/json")
-	public List<User> getAllUser() {
-		return userDAO.getAllUser();
+	public List<UserDetail> getAllUser() {
+		return userDAO.getAllUser(); 
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<User> createUser(@RequestBody User user) {
+	public ResponseEntity<UserDetail> createUser(@RequestBody UserDetail user) {
 		user.setIsOnline("N");
-		user.setRole("User");
+		user.setRole("USER");
 		boolean isSaved = userDAO.saveUser(user);
 		if (isSaved)
-			return new ResponseEntity<User>(user, HttpStatus.OK);
+			return new ResponseEntity<UserDetail>(user, HttpStatus.OK);
 		else
-			return new ResponseEntity<User>(user, HttpStatus.METHOD_FAILURE);
+			return new ResponseEntity<UserDetail>(user, HttpStatus.METHOD_FAILURE);
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity <User> checkLogin(@RequestBody User user, HttpSession session) {
-		
+	public ResponseEntity <UserDetail> checkLogin(@RequestBody UserDetail user, HttpSession session) {		
 		if (userDAO.checkLogin(user)) {
 			System.out.println("logging"); 
-			User tempUser = userDAO.getUser(user.getUsername());
+			UserDetail tempUser = userDAO.getUser(user.getUsername());
 			userDAO.updateOnlineStatus("Y", tempUser);
-			session.setAttribute("username", user.getUsername());
-			
-			return new ResponseEntity<User>(tempUser, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<User>(user, HttpStatus.METHOD_FAILURE);
+			session.setAttribute("currentUser:", user.getUsername());
+			System.out.println("User Controller::"+user.getUsername());			
+			return new ResponseEntity<UserDetail>(tempUser, HttpStatus.OK);
+		}
+		else 
+		{
+			return new ResponseEntity<UserDetail>(user, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
 	@GetMapping(value = "/logout/{username}")
 	public ResponseEntity<String> loggingout(@PathVariable("username") String username) {
-		User user = userDAO.getUser(username);
+		UserDetail user = userDAO.getUser(username);
 		if (userDAO.updateOnlineStatus("N", user)) {
 			return new ResponseEntity<String>("Successful logout", HttpStatus.OK);
 		} else {

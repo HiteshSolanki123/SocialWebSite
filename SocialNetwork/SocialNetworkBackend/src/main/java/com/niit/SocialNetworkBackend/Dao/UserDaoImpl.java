@@ -11,32 +11,35 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.niit.SocialNetworkBackend.Model.User;
+import com.niit.SocialNetworkBackend.Model.UserDetail;
+
 @Repository("userDAO")
 @Transactional
 
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	public UserDaoImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
-
-	public List<User> getAllUser() {
-		String hql ="from User";
-		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+	public List<UserDetail> getAllUser() {
+		String hql = "from UserDetail";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
 
 	@Transactional
-	public boolean saveUser(User user) {
-		try{
+	public boolean saveUser(UserDetail user) {
+		try {
 			sessionFactory.getCurrentSession().save(user);
 			return true;
-		}
-		catch(HibernateException e){
+		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
 
@@ -44,43 +47,36 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Transactional
-	@Override
-	public User getUser(String username) {
-		
-		return (User)sessionFactory.getCurrentSession().get(User.class, username);
+	public UserDetail getUser(String username) {
+
+		return (UserDetail) sessionFactory.getCurrentSession().get(UserDetail.class, username);
 	}
 
 	@Transactional
-	@Override
-	public boolean updateOnlineStatus(String status, User user) {
-		try
-		{
+	public boolean updateOnlineStatus(String status, UserDetail user) {
+		try {
 			user.setIsOnline(status);
 			sessionFactory.getCurrentSession().update(user);
 			return true;
-		}catch(Exception e)
-		{
-			System.out.println("exception arised:::"+e);
+		} catch (Exception e) {
+			System.out.println("exception arised:::" + e);
 			return false;
 		}
-	
+
 	}
 
-
-	@Override
-	public boolean checkLogin(User user) {
-		try{
-			Session session=sessionFactory.openSession();
-			Query query=session.createQuery("from User where username=:uname and password=:paswrd");
-			query.setParameter("uname",user.getUsername());
-			query.setParameter("paswrd",user.getPassword());
-			User user1=(User)query.list().get(0);
-			if(user1==null)
+	public boolean checkLogin(UserDetail user) {
+		try {
+			Session session = sessionFactory.openSession();
+			Query query = session.createQuery("from UserDetail where username=:uname and password=:paswrd");
+			query.setParameter("uname", user.getUsername());
+			query.setParameter("paswrd", user.getPassword());
+			UserDetail tempuser = (UserDetail) query.list().get(0);
+			if (tempuser == null)
 				return false;
 			else
 				return true;
-		}catch(Exception e)
-		{
+		} catch (Exception e) {
 			return false;
 		}
 	}

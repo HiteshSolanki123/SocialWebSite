@@ -2,15 +2,15 @@ package com.niit.SocialNetworkBackend.Dao;
 
 import java.util.List;
 
-import com.niit.SocialNetworkBackend.Model.User;
+import com.niit.SocialNetworkBackend.Model.UserDetail;
 
 public interface UserDao {
 
-	public List<User> getAllUser();
+	public List<UserDetail> getAllUser();
 	
-	public boolean saveUser(User user);
-	public User getUser(String username);
-	public boolean updateOnlineStatus(String status,User user);
-	public boolean checkLogin (User user);
+	public boolean saveUser(UserDetail user);
+	public UserDetail getUser(String username);
+	public boolean updateOnlineStatus(String status,UserDetail user);
+	public boolean checkLogin (UserDetail user);
 	
 }

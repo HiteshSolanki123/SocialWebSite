@@ -1,7 +1,7 @@
 app.controller("adminBlogController", function($scope, $http, $location) {
 	function fetchAllBlog() {
 		console.log("Fetching all blogs");
-		$http.get("http://localhost:8080/SocialNetworkAppRest/getAllBlogs")
+		$http.get("http://localhost:8090/SocialNetworkAppRest/getAllBlogs")
 
 		.then(function(response) {
 			$scope.blogdata = response.data;
@@ -13,7 +13,7 @@ app.controller("adminBlogController", function($scope, $http, $location) {
 	$scope.approveBlog=function(blogId) 
 	{
 		console.log("entered in approve blog");
-		$http.get('http://localhost:8080/SocialNetworkAppRest/approveBlog/'+ blogId)
+		$http.get('http://localhost:8090/SocialNetworkAppRest/approveBlog/'+ blogId)
 				.then(fetchAllBlog(), function(response) 
 		{
 			console.log("Blog is approved");
@@ -22,7 +22,7 @@ app.controller("adminBlogController", function($scope, $http, $location) {
 	}
 	$scope.rejectBlog=function(blogId)
 	{
-	$http.get('http://localhost:8080/SocialNetworkAppRest/rejectBlog/'+blogId)
+	$http.get('http://localhost:8090/SocialNetworkAppRest/rejectBlog/'+blogId)
 	.then(fetchAllBlog(),function(response){
 		console.log('blog rejected');
 	})

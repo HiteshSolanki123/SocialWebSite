@@ -9,19 +9,19 @@
   <div class="row" id="pwd-container">
     <div class="col-md-4"></div>
     
-    <div class="col-md-4" data-ng-submit="login()">
+    <div class="col-md-4" >
       <section class="login-form">
         <form method="post" action="#" role="login">
           <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
-          <input type="text" data-ng-model="user.username" name="username" placeholder="username" required class="form-control input-lg"  />
+          <input type="text" ng-model="user.username" name="username" placeholder="username" required class="form-control input-lg"  />
           
-          <input type="password" data-ng-model="user.password" class="form-control input-lg" id="password" placeholder="Password" required="" />
+          <input type="password" ng-model="user.password" class="form-control input-lg" id="password" placeholder="Password" required="" />
           
           
           <div class="pwstrength_viewport_progress"></div>
           
           
-          <button  type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
+          <button  type="submit"  class="btn btn-lg btn-primary btn-block" ng-click="loginuser()">Login</button>
           <div>
             <a href="#/registration">Create account</a> 
           </div>

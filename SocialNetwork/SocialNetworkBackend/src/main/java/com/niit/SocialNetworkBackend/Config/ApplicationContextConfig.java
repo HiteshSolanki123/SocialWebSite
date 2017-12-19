@@ -6,7 +6,6 @@ import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
 import org.jboss.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,45 +14,104 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.SocialNetworkBackend.Dao.BlogCommentsDao;
+import com.niit.SocialNetworkBackend.Dao.BlogCommentsDaoImpl;
+import com.niit.SocialNetworkBackend.Dao.BlogDao;
+import com.niit.SocialNetworkBackend.Dao.BlogDaoImpl;
+import com.niit.SocialNetworkBackend.Dao.ForumCommentsDao;
+import com.niit.SocialNetworkBackend.Dao.ForumCommentsDaoImpl;
+import com.niit.SocialNetworkBackend.Dao.ForumDao;
+import com.niit.SocialNetworkBackend.Dao.ForumDaoImpl;
+import com.niit.SocialNetworkBackend.Dao.FriendDao;
+import com.niit.SocialNetworkBackend.Dao.FriendDaoImpl;
+import com.niit.SocialNetworkBackend.Dao.JobsDao;
+import com.niit.SocialNetworkBackend.Dao.JobsDaoImpl;
+import com.niit.SocialNetworkBackend.Dao.UserDao;
+import com.niit.SocialNetworkBackend.Dao.UserDaoImpl;
+import com.niit.SocialNetworkBackend.Model.BlogComment;
+import com.niit.SocialNetworkBackend.Model.Blogs;
+import com.niit.SocialNetworkBackend.Model.Forum;
+import com.niit.SocialNetworkBackend.Model.ForumComment;
+import com.niit.SocialNetworkBackend.Model.Friend;
+import com.niit.SocialNetworkBackend.Model.Jobs;
+import com.niit.SocialNetworkBackend.Model.UserDetail;
+
 @Configuration
 @ComponentScan("com.niit")
 @EnableTransactionManagement
 public class ApplicationContextConfig {
 	public static Logger logger = Logger.getLogger("ApplicationContextConfig");
 
-	@Bean(name = "dataSource")
-	public DataSource getDataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:tcp://localhost/~/Project2");
-		dataSource.setUsername("abcd");
-		dataSource.setPassword("");
-
-		return dataSource;
+	public DataSource getOracleDataSource() {
+		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+		driverManagerDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+		driverManagerDataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
+		driverManagerDataSource.setUsername("system");
+		driverManagerDataSource.setPassword("hitesh");
+		return driverManagerDataSource;
 	}
 
-	private Properties getHibernateProperties() {
+	public Properties getHibernateProperties() {
 		Properties properties = new Properties();
-		properties.put("hibernate.show_sql", "true");
-		properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-		properties.put("hibernate.hbm2ddl.auto", "update");
-
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
 		return properties;
 	}
 
-	@Autowired
-	@Bean(name = "transactionManager")
-	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
-		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
-		return transactionManager;
+	@Bean
+	public SessionFactory getSessionFactory() {
+		LocalSessionFactoryBuilder localSessionFactoryBuilder = new LocalSessionFactoryBuilder(getOracleDataSource());
+		localSessionFactoryBuilder.addProperties(getHibernateProperties());
+		localSessionFactoryBuilder.addAnnotatedClass(Blogs.class);
+		localSessionFactoryBuilder.addAnnotatedClass(BlogComment.class);
+		localSessionFactoryBuilder.addAnnotatedClass(Forum.class);
+		localSessionFactoryBuilder.addAnnotatedClass(ForumComment.class);
+		localSessionFactoryBuilder.addAnnotatedClass(Friend.class);
+		localSessionFactoryBuilder.addAnnotatedClass(Jobs.class);
+		localSessionFactoryBuilder.addAnnotatedClass(UserDetail.class);
+
+		System.out.println("SessionFactory Bean Created");
+		return localSessionFactoryBuilder.buildSessionFactory();
 	}
 
-	@Autowired
-	@Bean(name = "sessionFactory")
-	public SessionFactory getSessionFactory(DataSource dataSource) {
-		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
-		sessionBuilder.addProperties(getHibernateProperties());
-		sessionBuilder.scanPackages("com.niit.SocialNetworkBackend.Model");
-		return sessionBuilder.buildSessionFactory();
+	@Bean
+	public HibernateTransactionManager getHibernateTransactionManager(SessionFactory sessionFactory) {
+		return new HibernateTransactionManager(sessionFactory);
+	}
+
+	@Bean
+	public UserDao getUserDAO(SessionFactory sessionFactory) {
+		System.out.println("User DAO object Created");
+		return new UserDaoImpl(sessionFactory);
+	}
+
+	@Bean
+	public BlogDao getBlogDAO(SessionFactory sessionFactory) {
+		System.out.println("Blog DAO object Created");
+		return new BlogDaoImpl(sessionFactory);
+	}
+	@Bean
+	public ForumDao getForumDAO(SessionFactory sessionFactory) {
+		System.out.println("Forum DAO object Created");
+		return new ForumDaoImpl(sessionFactory);
+	}
+	@Bean
+	public JobsDao getJobsDAO(SessionFactory sessionFactory) {
+		System.out.println("jobs DAO object Created");
+		return new JobsDaoImpl(sessionFactory);
+	}@Bean
+	public FriendDao getFriendDAO(SessionFactory sessionFactory) {
+		System.out.println("Friend DAO object Created");
+		return new FriendDaoImpl(sessionFactory);
+	}
+	@Bean
+	public ForumCommentsDao getForumCommentsDAO(SessionFactory sessionFactory) {
+		System.out.println("ForumComments DAO object Created");
+		return new ForumCommentsDaoImpl(sessionFactory);
+	}
+	@Bean
+	public BlogCommentsDao getBlogCommentsDAO(SessionFactory sessionFactory) {
+		System.out.println("BlogComments DAO object Created");
+		return new BlogCommentsDaoImpl(sessionFactory);
 	}
 }

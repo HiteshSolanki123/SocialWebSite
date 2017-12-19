@@ -23,7 +23,6 @@ public class FriendDaoImpl implements FriendDao {
 	}
 
 	@Transactional
-	@Override
 	public boolean createFriend(Friend friend) {
 		try {
 			sessionFactory.getCurrentSession().save(friend);
@@ -34,7 +33,6 @@ public class FriendDaoImpl implements FriendDao {
 		}
 	}
 
-	@Override
 	public List<Friend> getAllFriendRequest(String username) {
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("from Friend where username=:uname");
@@ -43,7 +41,6 @@ public class FriendDaoImpl implements FriendDao {
 		return listFriends;
 	}
 
-	@Override
 	public List<Friend> getApprovedFriends(String username) {
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("from Friend where username=:uname and status='A'");
@@ -52,7 +49,6 @@ public class FriendDaoImpl implements FriendDao {
 		return listFriends;
 	}
 
-	@Override
 	public Friend getFriend(int friendId) {
 		Session session = sessionFactory.openSession();
 		Friend friend = (Friend) session.get(Friend.class, friendId);
@@ -60,7 +56,6 @@ public class FriendDaoImpl implements FriendDao {
 	}
 
 	@Transactional
-	@Override
 	public boolean rejectFriendRequest(Friend friend) {
 		try {
 			friend.setStatus("R");
@@ -73,7 +68,6 @@ public class FriendDaoImpl implements FriendDao {
 	}
 
 	@Transactional
-	@Override
 	public boolean approveFriendRequest(Friend friend) {
 		try {
 			friend.setStatus("A");

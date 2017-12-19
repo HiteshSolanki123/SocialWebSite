@@ -9,13 +9,16 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.niit.SocialNetworkBackend.Model.Blog;
+import com.niit.SocialNetworkBackend.Model.Blogs;
 import com.niit.SocialNetworkBackend.Model.Forum;
 
 @Repository("forumDAO")
 public class ForumDaoImpl implements ForumDao {
 	@Autowired
 	SessionFactory sessionFactory;
+	public ForumDaoImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	@Transactional
 	public boolean addForum(Forum forum) {

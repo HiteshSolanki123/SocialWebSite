@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.SocialNetworkBackend.Dao.ForumDao;
-import com.niit.SocialNetworkBackend.Model.Blog;
 import com.niit.SocialNetworkBackend.Model.Forum;
 
 @RestController
