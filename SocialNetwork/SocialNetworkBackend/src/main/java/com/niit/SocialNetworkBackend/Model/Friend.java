@@ -14,6 +14,9 @@ public class Friend {
 	@GeneratedValue
 	int friendId;
 	String friendname;
+	String username;
+	String status;
+
 	public String getFriendname() {
 		return friendname;
 	}
@@ -21,9 +24,6 @@ public class Friend {
 	public void setFriendname(String friendname) {
 		this.friendname = friendname;
 	}
-
-	String username;
-	String status;
 
 	public int getFriendId() {
 		return friendId;

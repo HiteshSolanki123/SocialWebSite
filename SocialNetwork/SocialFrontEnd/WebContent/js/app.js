@@ -15,7 +15,8 @@ app.config(function($routeProvider, $locationProvider) {
 	.when('/registration', {templateUrl : 'user/registration.html',controller : 'userController'})
 	.when('/login', {templateUrl : 'user/login.html',controller : 'userController'})
 	.when('/friend', {templateUrl : 'friend/friend.html',controller : 'userController'})
-	.when('/UserHome', {templateUrl : 'pages/home.html',controller : 'mainController'});
+	.when('/UserHome', {templateUrl : 'pages/home.html',controller : 'mainController'})
+	.when('/showFriendRequest', {templateUrl : 'friend/showFriendRequest.html',controller : 'friendController'});
 
 });
 /*app.run(function($rootScope,$cookieStore){

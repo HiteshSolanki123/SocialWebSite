@@ -20,7 +20,7 @@ app.controller("userController", function($scope, $http, $location,$rootScope)
 		.then(function(response){
 			$scope.user=response.data;
 			$rootScope.currentUser=response.data;
-			$cookieStore.put('user',response.data);
+			/*$cookieStore.put('user',response.data);*/
 			console.log($rootScope.currentUser.role);
 			$location.path("/UserHome")
 		});

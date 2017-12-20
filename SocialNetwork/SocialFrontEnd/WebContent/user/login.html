@@ -1,4 +1,4 @@
-<div class="jumbotron text-center">
+ <div class="jumbotron text-center">
 	<h1>Login Page</h1>
 	
 	
@@ -11,7 +11,7 @@
     
     <div class="col-md-4" >
       <section class="login-form">
-        <form method="post" action="#" role="login">
+        <form id="users" method="post">
           <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
           <input type="text" ng-model="user.username" name="username" placeholder="username" required class="form-control input-lg"  />
           
@@ -43,4 +43,30 @@
   </p>     
   
   </div>
-</div>
+</div> 
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div ng-controller="userController">
+
+<form id="users" method="post">
+<table>
+<tr><td>Username</td>
+<td><input type="text" ng-model="user.username"/></td>
+</tr>
+
+<tr><td>Password</td>
+<td><input type="text" ng-model="user.password"/></td>
+</tr>
+<tr><td><input type="submit" value="login" ng-click="loginuser()"></td>
+</tr>
+</table>
+</form>
+</body>
+</html> -->

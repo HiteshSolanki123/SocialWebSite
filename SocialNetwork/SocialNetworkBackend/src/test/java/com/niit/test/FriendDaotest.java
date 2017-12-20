@@ -37,15 +37,15 @@ public class FriendDaotest {
 		assertTrue("problem in friend", friendDAO.createFriend(friend));
 	}
 
-	@Ignore
+	
 	@Test
 	public void getAllFriendRequest() {
 		List<Friend> listFriends = friendDAO.getAllFriendRequest("hitesh");
 		assertNotNull("problem in list friends", listFriends);
 		for (Friend friend : listFriends) {
-			System.out.println("current username" + friend.getUsername());
-			System.out.println("friend name" + friend.getFriendname());
-			System.out.println("status" + friend.getStatus());
+			System.out.println("current username:::" + friend.getUsername());
+			System.out.println("friend name::::" + friend.getFriendname());
+			System.out.println("status::::" + friend.getStatus());
 		}
 
 	}
@@ -75,6 +75,7 @@ public class FriendDaotest {
 		Friend friend=friendDAO.getFriend(5);
 		assertTrue("problem in approving",friendDAO.approveFriendRequest(friend));
 	}
+	@Ignore
 	@Test
 	public void rejectFriendRequest()
 	{

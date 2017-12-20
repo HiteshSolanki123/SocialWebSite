@@ -46,7 +46,7 @@ public class UserController {
 			System.out.println("logging"); 
 			UserDetail tempUser = userDAO.getUser(user.getUsername());
 			userDAO.updateOnlineStatus("Y", tempUser);
-			session.setAttribute("currentUser:", user.getUsername());
+			session.setAttribute("username:", user.getUsername());
 			System.out.println("User Controller::"+user.getUsername());			
 			return new ResponseEntity<UserDetail>(tempUser, HttpStatus.OK);
 		}
