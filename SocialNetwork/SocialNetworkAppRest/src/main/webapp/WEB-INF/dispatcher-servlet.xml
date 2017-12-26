@@ -10,12 +10,15 @@
     http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context.xsd ">
 
+
+
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.niit.rest.controller"></context:component-scan>
 	<context:component-scan base-package="com.niit.SocialNetworkBackend.Dao"/>
 	<context:component-scan base-package="com.niit.SocialNetworkBackend.Config"/>
 	<context:component-scan base-package="com.niit.SocialNetworkBackend.Model"/>
-	
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
 	
 	
 </beans>

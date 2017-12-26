@@ -78,5 +78,18 @@ public class FriendDaoImpl implements FriendDao {
 			return false;
 		}
 	}
+	public Friend getFriends(String username, String friendid) {
+
+		List<Friend> friend = null;
+		
+		String SQL = "FROM Friend where currentUser ='" + username + "' and friendName like '" + friendid + "%'";
+	
+		friend = sessionFactory.getCurrentSession().createQuery(SQL).list();
+		if (!friend.isEmpty()) {
+			return friend.get(0);
+		}
+		return null;
+	}
+
 
 }

@@ -19,13 +19,15 @@
 	</form>
 
 <br/>
-	<table align="center" width="100%" border=1>
-		
-		<tr bgcolor="orange">
+	<div class="table-responsive">
+	<table id="myTable" class="table table-striped" >
+		<thead>
+		<tr bgcolor="hotpink">
 			<td>Forum Name</td>
 			<td>Forum Content</td>
 			<td>Operations</td>
 		</tr>
+		</thead>
 		<tr bgcolor="cyan" ng-repeat="forum in forumdata">
 			<td>{{forum.forumName}}</td>
 			<td>{{forum.forumContent}}</td>

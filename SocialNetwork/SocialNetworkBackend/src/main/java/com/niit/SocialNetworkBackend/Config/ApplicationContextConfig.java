@@ -26,6 +26,8 @@ import com.niit.SocialNetworkBackend.Dao.FriendDao;
 import com.niit.SocialNetworkBackend.Dao.FriendDaoImpl;
 import com.niit.SocialNetworkBackend.Dao.JobsDao;
 import com.niit.SocialNetworkBackend.Dao.JobsDaoImpl;
+import com.niit.SocialNetworkBackend.Dao.ProfilePictureDao;
+import com.niit.SocialNetworkBackend.Dao.ProfilePictureDaoImpl;
 import com.niit.SocialNetworkBackend.Dao.UserDao;
 import com.niit.SocialNetworkBackend.Dao.UserDaoImpl;
 import com.niit.SocialNetworkBackend.Model.BlogComment;
@@ -34,6 +36,7 @@ import com.niit.SocialNetworkBackend.Model.Forum;
 import com.niit.SocialNetworkBackend.Model.ForumComment;
 import com.niit.SocialNetworkBackend.Model.Friend;
 import com.niit.SocialNetworkBackend.Model.Jobs;
+import com.niit.SocialNetworkBackend.Model.ProfilePicture;
 import com.niit.SocialNetworkBackend.Model.UserDetail;
 
 @Configuration
@@ -69,6 +72,9 @@ public class ApplicationContextConfig {
 		localSessionFactoryBuilder.addAnnotatedClass(Friend.class);
 		localSessionFactoryBuilder.addAnnotatedClass(Jobs.class);
 		localSessionFactoryBuilder.addAnnotatedClass(UserDetail.class);
+		localSessionFactoryBuilder.addAnnotatedClass(UserDetail.class);
+		localSessionFactoryBuilder.addAnnotatedClass(ProfilePicture.class);
+
 
 		System.out.println("SessionFactory Bean Created");
 		return localSessionFactoryBuilder.buildSessionFactory();
@@ -113,5 +119,10 @@ public class ApplicationContextConfig {
 	public BlogCommentsDao getBlogCommentsDAO(SessionFactory sessionFactory) {
 		System.out.println("BlogComments DAO object Created");
 		return new BlogCommentsDaoImpl(sessionFactory);
+	}
+	@Bean
+	public ProfilePictureDao getProfilePictureDAO(SessionFactory sessionFactory) {
+		System.out.println("ProfilePicture DAO object Created");
+		return new ProfilePictureDaoImpl(sessionFactory);
 	}
 }

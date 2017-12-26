@@ -55,11 +55,20 @@ public class FriendController {
 			return new ResponseEntity<String>("Problem in reject the request",HttpStatus.METHOD_FAILURE);
 		}
 	}
+	
 	@GetMapping(value="/getAllFriendRequest")
 	public ResponseEntity<List<Friend>> getAllFriendRequest(HttpSession session)
-	{
+	{	
+	
 		String currentUser=(String)session.getAttribute("currentUser");
+		currentUser="hitesh";
+		System.out.println("current user="+currentUser);
+		
 		List<Friend> listFriendRequests=friendDAO.getAllFriendRequest(currentUser);
+		if(!listFriendRequests.isEmpty())
 		return new ResponseEntity<List<Friend>>(listFriendRequests,HttpStatus.OK);
+		else return new ResponseEntity<List<Friend>>(listFriendRequests,HttpStatus.NO_CONTENT);
 	}
+	
+	
 }
