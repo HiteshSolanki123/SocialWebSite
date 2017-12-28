@@ -14,12 +14,8 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.niit.SocialNetworkBackend.Dao.BlogCommentsDao;
-import com.niit.SocialNetworkBackend.Dao.BlogCommentsDaoImpl;
 import com.niit.SocialNetworkBackend.Dao.BlogDao;
 import com.niit.SocialNetworkBackend.Dao.BlogDaoImpl;
-import com.niit.SocialNetworkBackend.Dao.ForumCommentsDao;
-import com.niit.SocialNetworkBackend.Dao.ForumCommentsDaoImpl;
 import com.niit.SocialNetworkBackend.Dao.ForumDao;
 import com.niit.SocialNetworkBackend.Dao.ForumDaoImpl;
 import com.niit.SocialNetworkBackend.Dao.FriendDao;
@@ -30,14 +26,14 @@ import com.niit.SocialNetworkBackend.Dao.ProfilePictureDao;
 import com.niit.SocialNetworkBackend.Dao.ProfilePictureDaoImpl;
 import com.niit.SocialNetworkBackend.Dao.UserDao;
 import com.niit.SocialNetworkBackend.Dao.UserDaoImpl;
-import com.niit.SocialNetworkBackend.Model.BlogComment;
 import com.niit.SocialNetworkBackend.Model.Blogs;
 import com.niit.SocialNetworkBackend.Model.Forum;
-import com.niit.SocialNetworkBackend.Model.ForumComment;
 import com.niit.SocialNetworkBackend.Model.Friend;
 import com.niit.SocialNetworkBackend.Model.Jobs;
 import com.niit.SocialNetworkBackend.Model.ProfilePicture;
+import com.niit.SocialNetworkBackend.Model.UserBlogComments;
 import com.niit.SocialNetworkBackend.Model.UserDetail;
+import com.niit.SocialNetworkBackend.Model.UserForumComments;
 
 @Configuration
 @ComponentScan("com.niit")
@@ -66,9 +62,9 @@ public class ApplicationContextConfig {
 		LocalSessionFactoryBuilder localSessionFactoryBuilder = new LocalSessionFactoryBuilder(getOracleDataSource());
 		localSessionFactoryBuilder.addProperties(getHibernateProperties());
 		localSessionFactoryBuilder.addAnnotatedClass(Blogs.class);
-		localSessionFactoryBuilder.addAnnotatedClass(BlogComment.class);
+		localSessionFactoryBuilder.addAnnotatedClass(UserForumComments.class);
 		localSessionFactoryBuilder.addAnnotatedClass(Forum.class);
-		localSessionFactoryBuilder.addAnnotatedClass(ForumComment.class);
+		localSessionFactoryBuilder.addAnnotatedClass(UserBlogComments.class);
 		localSessionFactoryBuilder.addAnnotatedClass(Friend.class);
 		localSessionFactoryBuilder.addAnnotatedClass(Jobs.class);
 		localSessionFactoryBuilder.addAnnotatedClass(UserDetail.class);
@@ -110,7 +106,7 @@ public class ApplicationContextConfig {
 		System.out.println("Friend DAO object Created");
 		return new FriendDaoImpl(sessionFactory);
 	}
-	@Bean
+	/*@Bean
 	public ForumCommentsDao getForumCommentsDAO(SessionFactory sessionFactory) {
 		System.out.println("ForumComments DAO object Created");
 		return new ForumCommentsDaoImpl(sessionFactory);
@@ -119,7 +115,7 @@ public class ApplicationContextConfig {
 	public BlogCommentsDao getBlogCommentsDAO(SessionFactory sessionFactory) {
 		System.out.println("BlogComments DAO object Created");
 		return new BlogCommentsDaoImpl(sessionFactory);
-	}
+	}*/
 	@Bean
 	public ProfilePictureDao getProfilePictureDAO(SessionFactory sessionFactory) {
 		System.out.println("ProfilePicture DAO object Created");

@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.SocialNetworkBackend.Dao.BlogCommentsDao;
-import com.niit.SocialNetworkBackend.Model.BlogComment;
+import com.niit.SocialNetworkBackend.Model.UserBlogComments;
 
 public class BlogCommentsTest {
 	static BlogCommentsDao blogCommentsDAO;
@@ -23,47 +23,48 @@ public class BlogCommentsTest {
 	annotationConfigApplicationContext.refresh();
 	blogCommentsDAO=(BlogCommentsDao) annotationConfigApplicationContext.getBean("blogCommentsDAO");
 	}
-	@Ignore
+	
 	@Test
 	public void saveBlogCommentstest() {
-		BlogComment blogComments=new BlogComment();
-		blogComments.setBlogCommentsId(101);
-		blogComments.setBlogId(101);
-		blogComments.setComment("good");
-		blogComments.setUserId(1);
-		blogComments.setUsername("comments");
+		UserBlogComments blogComments=new UserBlogComments();
+		blogComments.setBlogid(101);
+		blogComments.setComments("good");
+		blogComments.setUsername("hitesh");
+		
 		
 		assertTrue("problem occured",blogCommentsDAO.saveBlogComments(blogComments));
 	}
 	@Ignore
 	@Test
 	public void deleteBlogComments(){
-		BlogComment blogComments=(BlogComment)blogCommentsDAO.getBlogComments(1);
+		UserBlogComments blogComments=(UserBlogComments)blogCommentsDAO.getBlogComments(1);
 		assertTrue("",blogCommentsDAO.deleteBlogComments(blogComments));
 	}@Ignore
 	@Test
 	public void updateCommentsBlog()
 	{
-		BlogComment blogComments=(BlogComment)blogCommentsDAO.getBlogComments(2);
-		blogComments.setComment("nice");
-		blogComments.setUserId(501);
+		UserBlogComments blogComments=(UserBlogComments)blogCommentsDAO.getBlogComments(2);
+		blogComments.setComments("nice");
+		blogComments.setUsername("hitesh");
 		assertTrue("forum is updated",blogCommentsDAO.updateBlogComments(blogComments));
 	}
+	@Ignore
 	@Test
 	public void getAllBlogComments(){
-		List<BlogComment>blogCommentsList=(List<BlogComment>)blogCommentsDAO.getAllBlogComments();
+		List<UserBlogComments>blogCommentsList=(List<UserBlogComments>)blogCommentsDAO.getAllBlogComments();
 		assertNotNull("",blogCommentsList.get(0));
-		for(BlogComment blogComments:blogCommentsList)
+		for(UserBlogComments blogComments:blogCommentsList)
 		{
-			System.out.println("blogcomment:::="+blogComments.getComment());
+			System.out.println("blogcomment:::="+blogComments.getComments()); 
 	}
 	}
+	@Ignore
 	@Test
 	public void getBlogComments(){
-		BlogComment blogComments=(BlogComment)blogCommentsDAO.getBlogComments(2);
+		UserBlogComments blogComments=(UserBlogComments)blogCommentsDAO.getBlogComments(2);
 		assertNotNull("error",blogComments);
-		System.out.println("jobs desc is "+blogComments.getBlogCommentsId());
-		System.out.println("jobs profile"+blogComments.getComment());
+		System.out.println("jobs desc is "+blogComments.getBlogid());
+		System.out.println("jobs profile"+blogComments.getComments());
 	}
 }
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.SocialNetworkBackend.Dao.ForumDao;
+import com.niit.SocialNetworkBackend.Model.Blogs;
 import com.niit.SocialNetworkBackend.Model.Forum;
 
 @RestController
@@ -24,6 +25,7 @@ public class ForumController {
 	@PostMapping(value="/insertForum")
 	public ResponseEntity<String> insertForum(@RequestBody Forum forum)
 	{
+		forum.setStatus("NA");
 		forum.setCreateDate(new java.util.Date());
 		if(forumDAO.addForum(forum))
 			return new ResponseEntity<String>("Forum Added",HttpStatus.OK);
@@ -63,6 +65,28 @@ public class ForumController {
 		{
 			return new ResponseEntity<String>("problem ipdating forum",HttpStatus.METHOD_FAILURE);
 		}
-		
+	}
+	@GetMapping("/approveForum/{forumId}")
+	public ResponseEntity<String> approveForum(@PathVariable("forumId") int forumId) {
+		Forum tempforum = forumDAO.getForum(forumId);
+
+		if (forumDAO.approveForum(tempforum)) {
+			return new ResponseEntity<String>("Blog updated", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>("error in Blog updation", HttpStatus.METHOD_FAILURE);
+		}
+	}
+
+	@GetMapping("/rejectForum/{forumId}")
+	public ResponseEntity<String> rejectForum(@PathVariable("forumId") int forumId) {
+		Forum tempforum = forumDAO.getForum(forumId);
+		if (forumDAO.rejectForum(tempforum))
+		{
+			return new ResponseEntity<String>("Blog updated", HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<String>("error in Blog updation", HttpStatus.METHOD_FAILURE);
+
+		}
 	}
 }

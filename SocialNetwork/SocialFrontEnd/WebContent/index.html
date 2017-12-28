@@ -20,6 +20,9 @@
 <script src="friend/friendController.js"></script>
 <script src="Chat/chatController.js"></script>
 <script src="Chat/chatService.js"></script>
+<script src="forum/adminForumController.js"></script>
+
+
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
 
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">   
@@ -34,7 +37,7 @@
 	<nav class="navbar navbar-inverse">
 	<div class="container">
 	<div class="navbar-header">
-	<a class="navbar-brand" href="/">Angular Routing Example</a>
+	<a class="navbar-brand" href="/">Social Web</a>
 	</div>
 
 	<ul class="nav navbar-nav navbar-right">
@@ -47,12 +50,16 @@
 	<li ng-show="currentUser.role=='ADMIN'"><a href=#addJobs><i class="fa fa-shield"></i>Add Job</a></li>
 	<li ng-show="currentUser.role=='USER'"><a href="#showFriendRequest"><i class="fa fa-shield"></i> Friend Request</a></li>
 	<li ng-show="currentUser.role=='ADMIN'"><a href="#adminBlog"><span class="glyphicon glyphicon-user"></span>Admin Blog</a></li>
-	<li ng-show="currentUser.role=='USER'"><a href="#logout" ng-click="logout()"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
+	<li ng-show="currentUser.role=='ADMIN'"><a href="#adminForum"><span class="glyphicon glyphicon-user"></span>Admin Forum</a></li>
+	
+	<li ng-show="currentUser.role=='USER' || currentUser.role=='ADMIN'"><a href="#logout" ng-click="logout()"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
 	<li ng-show="currentUser.role=='USER'"><a href="#friend"><span class="fa fa-shield"></span>Friends</a></li>
 	<li ng-show="currentUser.role=='USER'"><a href="#ProfilePicture"><span class="fa fa-shield"></span>ProfilePicture</a></li>
 	<li ng-show="currentUser.role=='USER'"><a href="#chat"><span class="fa fa-shield"></span>Chat</a></li>
 	
 	<li ng-show="currentUser.role=='USER' || currentUser.role=='ADMIN'"><a href="#"><i class="fa fa-shield"></i>Welcome:{{currentUser.username}}</a></li>
+	<li ng-show="currentUser.role=='USER'">
+	<img src="http://localhost:8090/SocialNetworkAppRest/getImage/{{currentUser.username}}" width="50" height="45"/></li>
 	
 	</ul>
 </div>

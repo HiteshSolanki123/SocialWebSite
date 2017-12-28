@@ -10,6 +10,7 @@ app.config(function($routeProvider, $locationProvider) {
 	.when('/blog', {templateUrl : 'blog/blog.html',	controller : 'blogController'})
 	.when('/forum',{templateUrl : 'forum/forum.html',controller : 'forumController'	})
 	.when('/adminBlog',{templateUrl : 'blog/adminBlog.html',controller : 'adminBlogController'})
+	.when('/adminForum',{templateUrl : 'forum/adminForum.html',controller : 'adminForumController'})
 	.when('/jobs',{templateUrl : 'jobs/jobsDetails.html',controller : 'jobsController'	})
 	.when('/', {templateUrl : 'pages/home.html',controller : 'mainController'})
 	.when('/registration', {templateUrl : 'user/registration.html',controller : 'userController'})

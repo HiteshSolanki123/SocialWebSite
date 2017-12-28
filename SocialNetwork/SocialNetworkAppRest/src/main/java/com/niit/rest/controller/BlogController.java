@@ -25,16 +25,13 @@ public class BlogController {
 	@PostMapping(value = "/insertBlog")
 	public ResponseEntity<String> insertBlog(@RequestBody Blogs blog)
 
-	{
+	{	
+		blog.setStatus("NA");
 		blog.setCreateDate(new java.util.Date());
 		if (blogDAO.addBlog(blog))
-
 			return new ResponseEntity<String>("Blog Added", HttpStatus.OK);
-
 		else
-
 			return new ResponseEntity<String>("exception arised", HttpStatus.METHOD_FAILURE);
-
 	}
 
 	@RequestMapping(value = "/getAllBlogs", method = RequestMethod.GET, headers = "Accept=application/json")

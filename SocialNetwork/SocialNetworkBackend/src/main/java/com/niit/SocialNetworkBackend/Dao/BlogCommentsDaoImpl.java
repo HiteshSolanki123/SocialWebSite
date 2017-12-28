@@ -9,8 +9,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.niit.SocialNetworkBackend.Model.BlogComment;
-@Repository("blogCommentsDAO")
+import com.niit.SocialNetworkBackend.Model.UserBlogComments;
+
+ @Repository("blogCommentsDAO")
 public class BlogCommentsDaoImpl implements BlogCommentsDao {
 	@Autowired
 	SessionFactory sessionFactory;
@@ -19,7 +20,7 @@ public class BlogCommentsDaoImpl implements BlogCommentsDao {
 	}
 
 	@Transactional
-	public boolean saveBlogComments(BlogComment blogComments) {
+	public boolean saveBlogComments(UserBlogComments blogComments) {
 		try {
 			sessionFactory.getCurrentSession().save(blogComments);
 			return true;
@@ -29,7 +30,7 @@ public class BlogCommentsDaoImpl implements BlogCommentsDao {
 		return false;
 	}
 	@Transactional
-	public boolean deleteBlogComments(BlogComment blogComments) {
+	public boolean deleteBlogComments(UserBlogComments blogComments) {
 		try {
 			sessionFactory.getCurrentSession().delete(blogComments);
 			return true;
@@ -39,7 +40,7 @@ public class BlogCommentsDaoImpl implements BlogCommentsDao {
 		return false;
 	}
 	@Transactional
-	public boolean updateBlogComments(BlogComment blogComments) {
+	public boolean updateBlogComments(UserBlogComments blogComments) {
 		try {
 			sessionFactory.getCurrentSession().update(blogComments);
 			return true;
@@ -49,15 +50,15 @@ public class BlogCommentsDaoImpl implements BlogCommentsDao {
 		return false;
 	}
 	@Transactional
-	public BlogComment getBlogComments(int blogCommentsId) {
+	public UserBlogComments getBlogComments(int blogCommentsId) {
 
 		Session session = sessionFactory.openSession();
-		BlogComment blogComments = (BlogComment) session.get(BlogComment.class, new Integer(blogCommentsId));
+		UserBlogComments blogComments = (UserBlogComments) session.get(UserBlogComments.class, new Integer(blogCommentsId));
 		return blogComments;
 
 	}
 	@Transactional
-	public List<BlogComment> getAllBlogComments() {
+	public List<UserBlogComments> getAllBlogComments() {
 
 		return sessionFactory.getCurrentSession().createQuery("from BlogComments").list();
 	}

@@ -9,13 +9,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.niit.SocialNetworkBackend.Model.Blogs;
 import com.niit.SocialNetworkBackend.Model.Forum;
 
 @Repository("forumDAO")
 public class ForumDaoImpl implements ForumDao {
 	@Autowired
 	SessionFactory sessionFactory;
+
 	public ForumDaoImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -40,18 +40,18 @@ public class ForumDaoImpl implements ForumDao {
 
 		} catch (Exception e) {
 
-		} 
+		}
 		return false;
 	}
 
 	@Transactional
 	public boolean deleteForum(Forum forum) {
-		try{
+		try {
 			sessionFactory.getCurrentSession().delete(forum);
 			return true;
 
-		}catch(Exception e){
-			
+		} catch (Exception e) {
+
 		}
 		return false;
 	}
@@ -61,13 +61,38 @@ public class ForumDaoImpl implements ForumDao {
 		Session session = sessionFactory.openSession();
 		Forum forum = (Forum) session.get(Forum.class, new Integer(forumId));
 		return forum;
-		
+
 	}
 
 	@Transactional
 	public List<Forum> getAllForums() {
-		
+
 		return sessionFactory.getCurrentSession().createQuery("from Forum").list();
 	}
+	@Transactional
+	@Override
+	public boolean approveForum(Forum forum) {
+		try {
+			forum.setStatus("A");
+			sessionFactory.getCurrentSession().update(forum);
+			return true;
+		} catch (Exception e) {
+			System.out.println("exception occured" + e);
+			return false;
+		}
+	}
+	@Transactional
+	@Override
+	public boolean rejectForum(Forum forum) {
+		try {
+			forum.setStatus("NA");
+			sessionFactory.getCurrentSession().update(forum);
+			return true;
+		} catch (Exception e) {
+			System.out.println("exception occured" + e);
+			return false;
+		}
+	}
+
 
 }

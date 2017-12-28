@@ -9,8 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.niit.SocialNetworkBackend.Model.Blogs;
-import com.niit.SocialNetworkBackend.Model.ForumComment;
+import com.niit.SocialNetworkBackend.Model.UserForumComments;
 
 @Repository("forumCommentsDAO")
 public class ForumCommentsDaoImpl implements ForumCommentsDao {
@@ -22,7 +21,7 @@ public class ForumCommentsDaoImpl implements ForumCommentsDao {
 	
 
 	@Transactional
-	public boolean saveForumComments(ForumComment forumComments) {
+	public boolean saveForumComments(UserForumComments forumComments) {
 		{
 			try {
 				sessionFactory.getCurrentSession().save(forumComments);
@@ -35,7 +34,7 @@ public class ForumCommentsDaoImpl implements ForumCommentsDao {
 	}
 
 	@Transactional
-	public boolean deleteForumComments(ForumComment forumComments) {
+	public boolean deleteForumComments(UserForumComments forumComments) {
 		try {
 			sessionFactory.getCurrentSession().delete(forumComments);
 			return true;
@@ -46,7 +45,7 @@ public class ForumCommentsDaoImpl implements ForumCommentsDao {
 		return false;
 	}
 	@Transactional
-	public boolean updateForumComments(ForumComment forumComments) {
+	public boolean updateForumComments(UserForumComments forumComments) {
 		try{
 			sessionFactory.getCurrentSession().update(forumComments);
 			return true;
@@ -58,16 +57,16 @@ public class ForumCommentsDaoImpl implements ForumCommentsDao {
 		return false;
 	}
 	@Transactional
-	public ForumComment getForumComments(int fComments) {
+	public UserForumComments getForumComments(int comments) {
 		Session session = sessionFactory.openSession();
-		ForumComment forumComments = (ForumComment) session.get(ForumComment.class, new Integer(fComments));
+		UserForumComments forumComments = (UserForumComments) session.get(UserForumComments.class, new Integer(comments));
 		return forumComments;
 		
 	}
 	@Transactional
-	public List<ForumComment> getAllForumComments() {
+	public List<UserForumComments> getAllForumComments() {
 		// TODO Auto-generated method stub
-		return sessionFactory.getCurrentSession().createQuery("from ForumComments").list();
+		return sessionFactory.getCurrentSession().createQuery("from UserForumComments").list();
 	}
 
 }

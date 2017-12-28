@@ -2,16 +2,16 @@ package com.niit.SocialNetworkBackend.Dao;
 
 import java.util.List;
 
-import com.niit.SocialNetworkBackend.Model.ForumComment;
+import com.niit.SocialNetworkBackend.Model.UserForumComments;
 
 public interface ForumCommentsDao {
-	public boolean saveForumComments(ForumComment forumComments);
+	public boolean saveForumComments(UserForumComments forumComments);
 
-	public boolean deleteForumComments(ForumComment forumComments);
+	public boolean deleteForumComments(UserForumComments forumComments);
 
-	public boolean updateForumComments(ForumComment forumComments);
+	public boolean updateForumComments(UserForumComments forumComments);
 
-	public ForumComment getForumComments(int fComments);
+	public UserForumComments getForumComments(int comments);
 
-	public List<ForumComment> getAllForumComments();
+	public List<UserForumComments> getAllForumComments();
 }
