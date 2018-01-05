@@ -25,11 +25,10 @@ public class ProfilePictureController {
 	{
 		System.out.println("uploading picture");
 		ProfilePicture profilePicture=new ProfilePicture();
-		
+		profilePicture.setUsername("sunny");
 		System.out.println(fileUpload.getBytes());	
 		System.out.println("picture uploaded");
 		profilePicture.setImage(fileUpload.getBytes());
-		profilePicture.setUsername("vishva");
 		profilePictureDAO.save(profilePicture);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}	

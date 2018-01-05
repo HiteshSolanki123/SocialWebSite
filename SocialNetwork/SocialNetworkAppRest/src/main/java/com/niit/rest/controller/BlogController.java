@@ -2,6 +2,8 @@ package com.niit.rest.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +25,12 @@ public class BlogController {
 	BlogDao blogDAO;
 
 	@PostMapping(value = "/insertBlog")
-	public ResponseEntity<String> insertBlog(@RequestBody Blogs blog)
+	public ResponseEntity<String> insertBlog(@RequestBody Blogs blog,HttpSession session)
 
 	{	
 		blog.setStatus("NA");
 		blog.setCreateDate(new java.util.Date());
+		blog.setUsername((String)session.getAttribute("currentUser.username"));
 		if (blogDAO.addBlog(blog))
 			return new ResponseEntity<String>("Blog Added", HttpStatus.OK);
 		else

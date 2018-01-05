@@ -2,41 +2,56 @@
 	<b font-size="6">Add Blog </b>
 </center>
 <div ng-controller="blogController">
+	<div class="container">
+		<div class="col-lg-12 well">
+			<div class="row">
+				<form data-ng-submit="insertBlog()" name="blogform">
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								<label>Blog Name</label> <input type="text"
+									data-ng-model="blog.blogName"
+									placeholder="Blog Name" class="form-control">
+							</div>
+						</div>
+						
+							<div class="card-body">
+							<label>Blog Content</label> <input type="text"
+								data-ng-model="blog.blogContent"
+								placeholder="Blog Content" class="form-control" rows="3">
+						</div>
+					</div>
 
-	<form id="blogform" data-ng-submit="insertBlog()" method="post">
-		<table align="center" width="100%" border=1>
-			<tr>
-				<td>Blog Name</td>
-				<td><input type="text" name="blogName" data-ng-model="blog.blogName"/></td>
-			</tr>
-			<tr>
-				<td>Blog Content</td>
-				<td><textarea cols="30" row="10" name="blogContent" data-ng-model="blog.blogContent" /></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2"><center><input type="submit" value="Insert Blog" ></center></td>
-		</table>
-	</form>
+					<div class="col-auto">
+						<button type="submit"  class="btn btn-primary btn-block">Submit</button>
+					</div>
 
-<br/>
-<div class="table-responsive">
-	<table id="myTable" class="table table-striped" > 
-  <thead>
-		
-		<tr >
-			<td><b>Blog Name</b></td>
-			<td><b>Blog Content</b></td>
-			<td><b>Likes</b></td>
-			<td><b>Operations</b></td>
-		</tr>
-		</thead>
-		<tr bgcolor="cyan" ng-repeat="blog in blogdata">
-			<td>{{blog.blogName}}</td>
-			<td>{{blog.blogContent}}</td>
-			<td>{{blog.likes}}<input type="submit" value="Like" ng-click="likeBlog(blog.blogId)"/></td>
-			<td colspan="2"><center><input type="submit" value=" Delete Blog" ng-click="deleteBlog(blog.blogId)"></center>
-		</tr>
+				</form>
+				</div>
+				</div>
+				</div>
+				
 
-	</table>
-</div>
-</div>
+				<br />
+				<div class="table-responsive">
+					<table id="myTable" class="table table-striped">
+						<thead>
+
+							<tr class="bg-primary">
+								<td><b>Blog Name</b></td>
+								<td><b>Blog Content</b></td>
+								<td><b>Likes</b></td>
+								<td><b>Operations</b></td>
+							</tr>
+						</thead>
+						<tr class="bg-success" ng-repeat="blog in blogdata">
+							<td>{{blog.blogName}}</td>
+							<td>{{blog.blogContent}}</td>
+							<td>{{blog.likes}}</td>
+							<input type="submit" value="Like" ng-click="likeBlog(blog.blogId)"/></td>
+							<td colspan="2"><center><input type="submit" value=" Delete Blog" ng-click="deleteBlog(blog.blogId)"></center></td>
+						</tr>
+
+					</table>
+				</div>
+			</div>

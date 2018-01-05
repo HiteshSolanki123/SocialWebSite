@@ -21,9 +21,10 @@ public class FriendController {
 	@Autowired
 	FriendDao friendDAO;
 
-	@PostMapping(value = "/createFriendRequest")
-	public ResponseEntity<String> createFriendRequest(@RequestBody Friend friend) {
+	@PostMapping(value = "/createFriendRequest/{username}")
+	public ResponseEntity<String> createFriendRequest(@PathVariable String username,@RequestBody Friend friend) {
 		friend.setStatus("R");
+		friend.setUsername(username);
 		if (friendDAO.createFriend(friend)) {
 			return new ResponseEntity<String>("Sucess", HttpStatus.OK);
 		} else {

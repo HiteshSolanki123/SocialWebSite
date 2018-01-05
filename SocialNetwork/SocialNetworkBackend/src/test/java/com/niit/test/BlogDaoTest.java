@@ -34,7 +34,7 @@ public class BlogDaoTest {
 		blog.setBlogName("blog");
 		blog.setLikes(100);
 		blog.setStatus("online");
-		blog.setUserId(123);
+		
 		assertTrue("problem in adding CartItem",blogDAO.addBlog(blog));
 
 	}

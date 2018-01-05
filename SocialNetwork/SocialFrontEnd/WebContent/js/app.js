@@ -15,7 +15,7 @@ app.config(function($routeProvider, $locationProvider) {
 	.when('/', {templateUrl : 'pages/home.html',controller : 'mainController'})
 	.when('/registration', {templateUrl : 'user/registration.html',controller : 'userController'})
 	.when('/login', {templateUrl : 'user/login.html',controller : 'userController'})
-	.when('/friend', {templateUrl : 'friend/friend.html',controller : 'friendController'})
+	.when('/friend', {templateUrl : 'friend/friend.html',controller : 'FriendController'})
 	.when('/UserHome', {templateUrl : 'pages/home.html',controller : 'mainController'})
 	.when('/addJobs', {templateUrl : 'jobs/jobs.html',controller : 'jobsController'})
 	.when('/ProfilePicture', {templateUrl : 'ProfilePicture/ProfilePic.html',controller : 'userController'})
@@ -36,6 +36,7 @@ app.run(function($rootScope,$cookieStore){
 		console.log($rootScope.currentUser.role);
 	}
 });
+
 
 app.controller('mainController', function($scope) {
 	$scope.message = 'This is home page';

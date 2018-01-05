@@ -40,4 +40,15 @@ app.controller("blogController", function($scope, $http, $location) {
 				$location.path("/blog");
 				});
 	};
+	$scope.editBlog=function(blogId)
+	{
+		console.log("editing");
+		$http.get('http://localhost:8090/SocialNetworkAppRest/editBlog/'+ blogId)
+		.success(fetchAllBlog(),function(response){
+			console.log("editing");
+			$scope.blog=response.data;
+			console.log($scope.blog);
+			$location.path("/blog");
+		});
+	}
 });
